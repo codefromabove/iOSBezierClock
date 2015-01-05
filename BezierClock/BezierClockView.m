@@ -187,6 +187,7 @@
 
 - (void)setBgColor:(UIColor *)backgroundColor
 {
+    _bgColor             = backgroundColor;
     self.backgroundColor = backgroundColor;
 
     NSUserDefaults *userDefaults        = [NSUserDefaults standardUserDefaults];
