@@ -2,7 +2,8 @@
 //  BezierDigitAnimator.m
 //  BezierClock
 //
-//  Created by Philip Schneider on 1/1/15.
+//  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
+//  by Philip Schneider on 1/1/15.
 //  Copyright (c) 2015 Code From Above, LLC. All rights reserved.
 //
 
@@ -99,9 +100,9 @@ static BOOL     drawControlLines     = NO;
          ratio:(float)ratio
 {
     float animationRatio = 0.0;
-    if (ratio > _animationStartRatio)
+    if (ratio > [self animationStartRatio])
     {
-        animationRatio = (ratio - _animationStartRatio) / (1 - _animationStartRatio);
+        animationRatio = (ratio - [self animationStartRatio]) / (1 - [self animationStartRatio]);
     }
     if (continualAnimation)
     {
@@ -141,15 +142,15 @@ static BOOL     drawControlLines     = NO;
 
         [path setLineWidth:3.0 * lineSize];
         [path setLineCapStyle:kCGLineCapRound];
-        [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + _origX,
-                                      lerp([current vertexY], [next vertexY], ratio) + _origY)];
+        [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
+                                      lerp([current vertexY], [next vertexY], ratio) + [self origY])];
 
         for (int i = 0; i < 4; i++)
         {
             NSArray *currentPoints = [current getControl:i];
             NSArray *nextPoints    = [next    getControl:i];
 
-            bezierVertexFromArrayListsRatios(path, currentPoints, nextPoints, ratio, _origX, _origY);
+            bezierVertexFromArrayListsRatios(path, currentPoints, nextPoints, ratio, [self origX], [self origY]);
         }
         [path stroke];
     }
@@ -163,14 +164,14 @@ static BOOL     drawControlLines     = NO;
 
     [path setLineWidth:4.0 * lineSize];
     [path setLineCapStyle:kCGLineCapRound];
-    [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + _origX,
-                                  lerp([current vertexY], [next vertexY], animationRatio) + _origY)];
+    [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
+                                  lerp([current vertexY], [next vertexY], animationRatio) + [self origY])];
     for (int i = 0; i < 4; i++)
     {
         NSArray *currentPoints = [current getControl:i];
         NSArray *nextPoints    = [next    getControl:i];
 
-        bezierVertexFromArrayListsRatios(path, currentPoints, nextPoints, animationRatio, _origX, _origY);
+        bezierVertexFromArrayListsRatios(path, currentPoints, nextPoints, animationRatio, [self origX], [self origY]);
     }
     [path stroke];
 
@@ -206,15 +207,15 @@ static BOOL     drawControlLines     = NO;
             NSArray *to   = [next    getControl:i];
 
             CGContextMoveToPoint(context,
-                                 lerp([[from objectAtIndex:2] floatValue], [[to objectAtIndex:2] floatValue], animationRatio) + _origX,
-                                 lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], animationRatio) + _origY);
+                                 lerp([[from objectAtIndex:2] floatValue], [[to objectAtIndex:2] floatValue], animationRatio) + [self origX],
+                                 lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], animationRatio) + [self origY]);
             CGContextAddLineToPoint(context,
-                                    lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + _origX,
-                                    lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + _origY);
+                                    lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + [self origX],
+                                    lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + [self origY]);
             CGContextStrokePath(context);
 
-            CGRect rectangle = CGRectMake(lerp([[from objectAtIndex:2] floatValue], [[to objectAtIndex:2] floatValue], animationRatio) + _origX - rad/2,
-                                          lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], animationRatio) + _origY - rad/2,
+            CGRect rectangle = CGRectMake(lerp([[from objectAtIndex:2] floatValue], [[to objectAtIndex:2] floatValue], animationRatio) + [self origX] - rad/2,
+                                          lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], animationRatio) + [self origY] - rad/2,
                                           rad,
                                           rad);
 
@@ -228,15 +229,15 @@ static BOOL     drawControlLines     = NO;
                 NSArray *toPlus1   = [next    getControl:i+1];
 
                 CGContextMoveToPoint(context,
-                                     lerp([[fromPlus1 objectAtIndex:0] floatValue], [[toPlus1 objectAtIndex:0] floatValue], animationRatio) + _origX,
-                                     lerp([[fromPlus1 objectAtIndex:1] floatValue], [[toPlus1 objectAtIndex:1] floatValue], animationRatio) + _origY);
+                                     lerp([[fromPlus1 objectAtIndex:0] floatValue], [[toPlus1 objectAtIndex:0] floatValue], animationRatio) + [self origX],
+                                     lerp([[fromPlus1 objectAtIndex:1] floatValue], [[toPlus1 objectAtIndex:1] floatValue], animationRatio) + [self origY]);
                 CGContextAddLineToPoint(context,
-                                        lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + _origX,
-                                        lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + _origY);
+                                        lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + [self origX],
+                                        lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + [self origY]);
                 CGContextStrokePath(context);
 
-                CGRect rectangle = CGRectMake(lerp([[fromPlus1 objectAtIndex:0] floatValue], [[toPlus1 objectAtIndex:0] floatValue], animationRatio) + _origX - rad/2,
-                                              lerp([[fromPlus1 objectAtIndex:1] floatValue], [[toPlus1 objectAtIndex:1] floatValue], animationRatio) + _origY - rad/2,
+                CGRect rectangle = CGRectMake(lerp([[fromPlus1 objectAtIndex:0] floatValue], [[toPlus1 objectAtIndex:0] floatValue], animationRatio) + [self origX] - rad/2,
+                                              lerp([[fromPlus1 objectAtIndex:1] floatValue], [[toPlus1 objectAtIndex:1] floatValue], animationRatio) + [self origY] - rad/2,
                                               rad,
                                               rad);
 
@@ -247,8 +248,8 @@ static BOOL     drawControlLines     = NO;
 
             // control point rectangles
             CGContextSetStrokeColorWithColor(context, colorRect);
-            CGRect rect = CGRectMake(lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + _origX - rad/2,
-                                     lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + _origY - rad/2,
+            CGRect rect = CGRectMake(lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + [self origX] - rad/2,
+                                     lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + [self origY] - rad/2,
                                      rad,
                                      rad);
             CGContextAddRect(context, rect);
@@ -264,15 +265,15 @@ static BOOL     drawControlLines     = NO;
                 NSArray *toZero   = [next    getControl:0];
 
                 CGContextMoveToPoint(context,
-                                     lerp([current vertexX], [next vertexX], animationRatio) + _origX,
-                                     lerp([current vertexY], [next vertexY], animationRatio) + _origY);
+                                     lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
+                                     lerp([current vertexY], [next vertexY], animationRatio) + [self origY]);
                 CGContextAddLineToPoint(context,
-                                        lerp([[fromZero objectAtIndex:0] floatValue], [[toZero objectAtIndex:0] floatValue], animationRatio) + _origX,
-                                        lerp([[fromZero objectAtIndex:1] floatValue], [[toZero objectAtIndex:1] floatValue], animationRatio) + _origY);
+                                        lerp([[fromZero objectAtIndex:0] floatValue], [[toZero objectAtIndex:0] floatValue], animationRatio) + [self origX],
+                                        lerp([[fromZero objectAtIndex:1] floatValue], [[toZero objectAtIndex:1] floatValue], animationRatio) + [self origY]);
                 CGContextStrokePath(context);
 
-                CGRect rectangle = CGRectMake(lerp([[fromZero objectAtIndex:0] floatValue], [[toZero objectAtIndex:0] floatValue], animationRatio) + _origX - rad/2,
-                                              lerp([[fromZero objectAtIndex:1] floatValue], [[toZero objectAtIndex:1] floatValue], animationRatio) + _origY - rad/2,
+                CGRect rectangle = CGRectMake(lerp([[fromZero objectAtIndex:0] floatValue], [[toZero objectAtIndex:0] floatValue], animationRatio) + [self origX] - rad/2,
+                                              lerp([[fromZero objectAtIndex:1] floatValue], [[toZero objectAtIndex:1] floatValue], animationRatio) + [self origY] - rad/2,
                                               rad,
                                               rad);
 
@@ -281,8 +282,8 @@ static BOOL     drawControlLines     = NO;
                 CGContextFillEllipseInRect(context, rectangle);
 
                 CGContextSetStrokeColorWithColor(context, colorBlue);
-                CGRect rect = CGRectMake(lerp([current vertexX], [next vertexX], animationRatio) + _origX - rad/2,
-                                         lerp([current vertexY], [next vertexY], animationRatio) + _origY - rad/2,
+                CGRect rect = CGRectMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX] - rad/2,
+                                         lerp([current vertexY], [next vertexY], animationRatio) + [self origY] - rad/2,
                                          rad,
                                          rad);
 

@@ -2,7 +2,8 @@
 //  BezierClockView.m
 //  BezierClock
 //
-//  Created by Philip Schneider on 12/31/14.
+//  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
+//  by Philip Schneider on 12/31/14.
 //  Copyright (c) 2014 Code From Above, LLC. All rights reserved.
 //
 
@@ -76,8 +77,6 @@
         _lineColor                  = [NSKeyedUnarchiver unarchiveObjectWithData:lineColorData];
         _lineSize                   = [userDefaults floatForKey:@"lineSize"];
         _bgColor                    = [NSKeyedUnarchiver unarchiveObjectWithData:backgroundColorData];
-
-        [self setBackgroundColor:_bgColor];
 
         [BezierDigitAnimator setDrawControlLines:_drawControlLines];
         [BezierDigitAnimator setContinualAnimation:_continualAnimation];
@@ -187,8 +186,7 @@
 
 - (void)setBgColor:(UIColor *)backgroundColor
 {
-    _bgColor             = backgroundColor;
-    self.backgroundColor = backgroundColor;
+    _bgColor = backgroundColor;
 
     NSUserDefaults *userDefaults        = [NSUserDefaults standardUserDefaults];
     NSData         *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:backgroundColor];
@@ -197,13 +195,13 @@
 
 - (float)getAnimStartRatio:(float)totalDuration
 {
-    if (_animDurationUser > totalDuration)
+    if ([self animDurationUser] > totalDuration)
     {
         return 0;
     }
     else
     {
-        return 1.0 - (_animDurationUser / totalDuration);
+        return 1.0 - ([self animDurationUser] / totalDuration);
     }
 }
 
@@ -219,23 +217,31 @@
     }
 }
 
+//
+// Drawing code
+//
 - (void)drawRect:(CGRect)rect
 {
     //
-    // Drawing code
+    // Animation control
     //
-    if (!self.animationRunning)
+    if (![self animationRunning])
     {
-        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-        self.animationRunning = YES;
+        [[self displayLink] addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [self setAnimationRunning:YES];
         return;
     }
 
-    if (self.lastDrawTime == 0)
+    if ([self lastDrawTime] == 0)
     {
-        self.lastDrawTime = self.displayLink.timestamp;
+        [self setLastDrawTime:[[self displayLink] timestamp]];
         return;
     }
+
+    //
+    // Always set bg color...
+    //
+    [self setBackgroundColor:[self bgColor]];
 
     //
     // Time display is about 2400x300. Scale so it fits...
@@ -266,13 +272,13 @@
     float secondsTenRatio  = (secondsUnit * 1000 + millis) / 10000.0;
 
     [[self secondsUnitsDigit] setAnimationStartRatio:[self getAnimStartRatio:1.0]];
-    [[self secondsUnitsDigit] update:[_digits objectAtIndex:secondsUnit]
-                                next:[_digits objectAtIndex:[self getNextInt:secondsUnit max:9]]
+    [[self secondsUnitsDigit] update:[[self digits] objectAtIndex:secondsUnit]
+                                next:[[self digits] objectAtIndex:[self getNextInt:secondsUnit max:9]]
                                ratio:secondsUnitRatio];
 
     [[self secondsTensDigit] setAnimationStartRatio:[self getAnimStartRatio:10.0]];
-    [[self secondsTensDigit] update:[_digits objectAtIndex:secondsTen]
-                               next:[_digits objectAtIndex:[self getNextInt:secondsTen max:5]]
+    [[self secondsTensDigit] update:[[self digits] objectAtIndex:secondsTen]
+                               next:[[self digits] objectAtIndex:[self getNextInt:secondsTen max:5]]
                               ratio:secondsTenRatio];
 
     //
@@ -285,13 +291,13 @@
     float mintuesTenRatio  = (minutesUnit * 60000 + secondTotal * 1000 + millis) / 600000.0;
 
     [[self minutesTensDigit] setAnimationStartRatio:[self getAnimStartRatio:600]];
-    [[self minutesTensDigit] update:[_digits objectAtIndex:minutesTen]
-                                next:[_digits objectAtIndex:[self getNextInt:minutesUnit max:5]]
+    [[self minutesTensDigit] update:[[self digits] objectAtIndex:minutesTen]
+                                next:[[self digits] objectAtIndex:[self getNextInt:minutesUnit max:5]]
                               ratio:mintuesTenRatio];
 
     [[self minutesUnitsDigit] setAnimationStartRatio:[self getAnimStartRatio:60]];
-    [[self minutesUnitsDigit] update:[_digits objectAtIndex:minutesUnit]
-                                next:[_digits objectAtIndex:[self getNextInt:minutesUnit max:9]]
+    [[self minutesUnitsDigit] update:[[self digits] objectAtIndex:minutesUnit]
+                                next:[[self digits] objectAtIndex:[self getNextInt:minutesUnit max:9]]
                                ratio:minutesUnitRatio];
     //
     // Hours
@@ -315,13 +321,13 @@
 
     }
 
-    [[self hoursTensDigit] update:[_digits objectAtIndex:hoursTen]
-                             next:[_digits objectAtIndex:[self getNextInt:hoursTen max:2]]
+    [[self hoursTensDigit] update:[[self digits] objectAtIndex:hoursTen]
+                             next:[[self digits] objectAtIndex:[self getNextInt:hoursTen max:2]]
                             ratio:hoursTenRatio];
 
     [[self hoursUnitsDigit] setAnimationStartRatio:[self getAnimStartRatio:3600]];
-    [[self hoursUnitsDigit] update:[_digits objectAtIndex:hoursUnit]
-                              next:[_digits objectAtIndex:hoursUnitNext]
+    [[self hoursUnitsDigit] update:[[self digits] objectAtIndex:hoursUnit]
+                              next:[[self digits] objectAtIndex:hoursUnitNext]
                              ratio:hoursUnitRatio];
 }
 

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *backgroundColorSwatchOutlet;
 @property (weak, nonatomic) IBOutlet UIButton *lineColorSwatchOutlet;
 @property (weak, nonatomic) IBOutlet UISlider *lineSizeOutlet;
+
 @end
 
 @implementation DisplayOptionsViewController
@@ -119,7 +120,7 @@
 
 - (IBAction)doneAction:(id)sender
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

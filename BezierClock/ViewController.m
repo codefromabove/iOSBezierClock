@@ -22,11 +22,11 @@
 {
     [super viewDidLoad];
 
-    _bcView = [[BezierClockView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:_bcView];
+    [self setBcView:[[BezierClockView alloc] initWithFrame:[[self view] bounds]]];
+    [[self view] addSubview:_bcView];
 
-    [_bcView setAutoresizesSubviews:YES];
-    [_bcView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    [[self bcView] setAutoresizesSubviews:YES];
+    [[self bcView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 }
 
 - (void)didReceiveMemoryWarning
