@@ -27,12 +27,12 @@ static void bezierVertexFromArrayListsRatios(UIBezierPath *path, NSArray *from, 
                                       lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], ratio) + offsetY)];
 }
 
-static UIColor *lineColor;
-static float    lineSize             = 1.0;
-static BOOL     continualAnimation   = NO;
-static int      animationType        = 4;
-static BOOL     showContinualShadows = NO;
-static BOOL     drawControlLines     = NO;
+static UIColor  *lineColor;
+static float     lineSize             = 1.0;
+static BOOL      continualAnimation   = NO;
+static NSInteger animationType        = 4;
+static BOOL      showContinualShadows = NO;
+static BOOL      drawControlLines     = NO;
 
 
 @interface BezierDigitAnimator ()
@@ -80,7 +80,7 @@ static BOOL     drawControlLines     = NO;
     continualAnimation = on;
 }
 
-+ (void)setAnimationType:(int)type
++ (void)setAnimationType:(NSInteger)type
 {
     animationType = type;
 }

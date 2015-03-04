@@ -27,7 +27,7 @@
 + (void)setLineColor:(UIColor *)color;
 + (void)setLineSize:(float)size;
 + (void)setContinualAnimation:(BOOL)on;
-+ (void)setAnimationType:(int)type;
++ (void)setAnimationType:(NSInteger)type;
 + (void)setShowContinualShadows:(BOOL)on;
 + (void)setDrawControlLines:(BOOL)on;
 

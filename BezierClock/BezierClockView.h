@@ -13,13 +13,13 @@
 //
 // Drawing and animation options
 //
-@property (nonatomic)         BOOL     drawControlLines;
-@property (nonatomic)         BOOL     continualAnimation;
-@property (nonatomic)         BOOL     showContinualShadows;
-@property (nonatomic)         int      animationType;
-@property (nonatomic)         float    animDurationUser;
-@property (nonatomic, strong) UIColor *lineColor;
-@property (nonatomic)         float    lineSize;
-@property (nonatomic, strong) UIColor *bgColor;
+@property (nonatomic)         BOOL      drawControlLines;
+@property (nonatomic)         BOOL      continualAnimation;
+@property (nonatomic)         BOOL      showContinualShadows;
+@property (nonatomic)         NSInteger animationType;
+@property (nonatomic)         float     animDurationUser;
+@property (nonatomic, strong) UIColor  *lineColor;
+@property (nonatomic)         float     lineSize;
+@property (nonatomic, strong) UIColor  *bgColor;
 
 @end

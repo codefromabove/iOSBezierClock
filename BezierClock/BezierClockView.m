@@ -148,7 +148,7 @@
     [userDefaults setBool:on forKey:@"setShowContinualShadows"];
 }
 
-- (void)setAnimationType:(int)type
+- (void)setAnimationType:(NSInteger)type
 {
     _animationType = type;
     [BezierDigitAnimator setAnimationType:type];
