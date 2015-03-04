@@ -11,7 +11,7 @@
 
 @interface BezierDigit ()
 
-@property (nonatomic, strong) NSArray *controls;;
+@property (nonatomic, strong) NSArray *controls;
 
 @end
 
