@@ -166,9 +166,9 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
         }
 
         // PJS Commented Out - don't want an update on every change, just on "exit"
-//        if (self.didChangeColorBlock != nil){
-//            self.didChangeColorBlock(self.color);
-//        }
+        if (self.didChangeColorBlock != nil){
+            self.didChangeColorBlock(self.color);
+        }
     }
 }
 
