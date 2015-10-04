@@ -49,7 +49,7 @@
 		66571A211A55AE1800626782 /* BezierDigitAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierDigitAnimator.m; sourceTree = "<group>"; };
 		66591C9A1A59AF2800774F8E /* animationOptions_29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationOptions_29x29.png; sourceTree = "<group>"; };
 		66591C9B1A59AF2800774F8E /* animationOptions_29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "animationOptions_29x29@2x.png"; sourceTree = "<group>"; };
-		66591C9E1A59B05300774F8E /* BezierDigit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = BezierDigit.h; sourceTree = "<group>"; };
+		66591C9E1A59B05300774F8E /* BezierDigit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BezierDigit.h; path = BezierClock/BezierDigit.h; sourceTree = "<group>"; };
 		66591C9F1A59B05300774F8E /* BezierDigit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierDigit.m; sourceTree = "<group>"; };
 		66591CA21A59B09300774F8E /* NKOColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = NKOColorPickerView.h; path = NKOColorPickerView/NKOColorPickerView.h; sourceTree = "<group>"; };
 		66591CA31A59B09300774F8E /* NKOColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NKOColorPickerView.m; path = NKOColorPickerView/NKOColorPickerView.m; sourceTree = "<group>"; };
@@ -139,6 +139,7 @@
 				66591C851A58615B00774F8E /* NKOColorPickerView */,
 				667A64481A54CB22008C45D7 /* BezierClock */,
 				667A64471A54CB22008C45D7 /* Products */,
+				66591C9E1A59B05300774F8E /* BezierDigit.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,7 +161,6 @@
 				66591C911A59A5BC00774F8E /* Assets */,
 				66571A1A1A54D00500626782 /* BezierClockView.h */,
 				66571A1B1A54D00500626782 /* BezierClockView.m */,
-				66591C9E1A59B05300774F8E /* BezierDigit.h */,
 				66591C9F1A59B05300774F8E /* BezierDigit.m */,
 				66571A201A55AE1800626782 /* BezierDigitAnimator.h */,
 				66571A211A55AE1800626782 /* BezierDigitAnimator.m */,
