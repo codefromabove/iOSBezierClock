@@ -36,6 +36,7 @@
 		667A64551A54CB22008C45D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A64531A54CB22008C45D7 /* Main.storyboard */; };
 		667A64571A54CB23008C45D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667A64561A54CB23008C45D7 /* Images.xcassets */; };
 		667A645A1A54CB23008C45D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 667A64581A54CB23008C45D7 /* LaunchScreen.xib */; };
+		66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +50,7 @@
 		66571A211A55AE1800626782 /* BezierDigitAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierDigitAnimator.m; sourceTree = "<group>"; };
 		66591C9A1A59AF2800774F8E /* animationOptions_29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationOptions_29x29.png; sourceTree = "<group>"; };
 		66591C9B1A59AF2800774F8E /* animationOptions_29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "animationOptions_29x29@2x.png"; sourceTree = "<group>"; };
-		66591C9E1A59B05300774F8E /* BezierDigit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BezierDigit.h; path = BezierClock/BezierDigit.h; sourceTree = "<group>"; };
+		66591C9E1A59B05300774F8E /* BezierDigit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierDigit.h; sourceTree = "<group>"; };
 		66591C9F1A59B05300774F8E /* BezierDigit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierDigit.m; sourceTree = "<group>"; };
 		66591CA21A59B09300774F8E /* NKOColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = NKOColorPickerView.h; path = NKOColorPickerView/NKOColorPickerView.h; sourceTree = "<group>"; };
 		66591CA31A59B09300774F8E /* NKOColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NKOColorPickerView.m; path = NKOColorPickerView/NKOColorPickerView.m; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		667A64541A54CB22008C45D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		667A64561A54CB23008C45D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		667A64591A54CB23008C45D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_83.5x83.5@2x.png"; path = "BezierClock/Images.xcassets/AppIcon.appiconset/icon_83.5x83.5@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				66591CCD1A59C7E300774F8E /* icon_60x60@3x.png */,
 				66591CC41A59C58F00774F8E /* icon_76x76.png */,
 				66591CC51A59C58F00774F8E /* icon_76x76@2x.png */,
+				66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -139,7 +142,6 @@
 				66591C851A58615B00774F8E /* NKOColorPickerView */,
 				667A64481A54CB22008C45D7 /* BezierClock */,
 				667A64471A54CB22008C45D7 /* Products */,
-				66591C9E1A59B05300774F8E /* BezierDigit.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +163,7 @@
 				66591C911A59A5BC00774F8E /* Assets */,
 				66571A1A1A54D00500626782 /* BezierClockView.h */,
 				66571A1B1A54D00500626782 /* BezierClockView.m */,
+				66591C9E1A59B05300774F8E /* BezierDigit.h */,
 				66591C9F1A59B05300774F8E /* BezierDigit.m */,
 				66571A201A55AE1800626782 /* BezierDigitAnimator.h */,
 				66571A211A55AE1800626782 /* BezierDigitAnimator.m */,
@@ -211,12 +214,13 @@
 		667A643E1A54CB22008C45D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Code From Above, LLC";
 				TargetAttributes = {
 					667A64451A54CB22008C45D7 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 42X34WDLP5;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -260,6 +264,7 @@
 				66591CCB1A59C58F00774F8E /* icon_76x76.png in Resources */,
 				66591CC61A59C58F00774F8E /* icon_29x29.png in Resources */,
 				66591CB01A59B48600774F8E /* drawingOptions_29x29@2x.png in Resources */,
+				66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */,
 				667A645A1A54CB23008C45D7 /* LaunchScreen.xib in Resources */,
 				667A64571A54CB23008C45D7 /* Images.xcassets in Resources */,
 				66591CD01A59C83400774F8E /* icon_40x40@3x.png in Resources */,
@@ -320,16 +325,20 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Schneider (2SET49KL85)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: philip@codefromabove.com (4W59RK2SLK)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -342,9 +351,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -363,23 +373,28 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Schneider (2SET49KL85)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: philip@codefromabove.com (4W59RK2SLK)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -390,13 +405,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Schneider (2SET49KL85)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BezierClock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codefromabove.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -404,13 +421,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Schneider (2SET49KL85)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BezierClock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codefromabove.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
