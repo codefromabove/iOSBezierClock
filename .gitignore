@@ -27,3 +27,6 @@ DerivedData
 
 # Editor residue
 *~
+
+# DSStore
+*.DS_Store
