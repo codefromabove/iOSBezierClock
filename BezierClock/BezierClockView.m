@@ -249,10 +249,27 @@
     CGContextRef ctx       = UIGraphicsGetCurrentContext();
     CGRect       bounds    = [self bounds];
     const float  scale     = bounds.size.width / 2400;
-    const float  translate = (bounds.size.height / 2.0) / scale - 300;
 
-    CGContextScaleCTM(ctx, scale, scale);
-    CGContextTranslateCTM(ctx, 0, translate);
+    //
+    // Tweak transform for device rotation.
+    //
+    if (self.transitioning)
+    {
+        CGRect      presentationLayerBounds = [self.layer.presentationLayer bounds];
+        const float heightRatio             = (bounds.size.height / presentationLayerBounds.size.height);
+        const float translate               = (bounds.size.height / 2.0) / (scale * heightRatio * heightRatio) - 300;
+
+        CGContextScaleCTM(ctx, scale, scale * heightRatio * heightRatio);
+        CGContextTranslateCTM(ctx, 0, translate);
+    }
+    else
+    {
+        const float translate = (bounds.size.height / 2.0) / scale - 300;
+
+        CGContextScaleCTM(ctx, scale, scale);
+        CGContextTranslateCTM(ctx, 0, translate);
+    }
+
 
     //
     // Date

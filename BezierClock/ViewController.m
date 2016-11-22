@@ -54,4 +54,19 @@
     }
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [[self bcView] setTransitioning:YES];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         // do whatever
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [[self bcView] setTransitioning:NO];
+     }];
+
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
+
 @end

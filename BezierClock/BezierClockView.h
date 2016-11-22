@@ -21,5 +21,6 @@
 @property (nonatomic, strong) UIColor  *lineColor;
 @property (nonatomic)         float     lineSize;
 @property (nonatomic, strong) UIColor  *bgColor;
+@property (nonatomic)         BOOL      transitioning;
 
 @end
