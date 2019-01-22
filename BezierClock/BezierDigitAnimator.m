@@ -140,7 +140,7 @@ static BOOL      drawControlLines     = NO;
         UIBezierPath *path = [[UIBezierPath alloc] init];
         [[UIColor lightGrayColor] setStroke];
 
-        [path setLineWidth:3.0 * lineSize];
+        [path setLineWidth:5.0 * lineSize];
         [path setLineCapStyle:kCGLineCapRound];
         [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
                                       lerp([current vertexY], [next vertexY], ratio) + [self origY])];
@@ -162,7 +162,7 @@ static BOOL      drawControlLines     = NO;
     UIBezierPath *path = [[UIBezierPath alloc] init];
     [lineColor setStroke];
 
-    [path setLineWidth:4.0 * lineSize];
+    [path setLineWidth:5.0 * lineSize];
     [path setLineCapStyle:kCGLineCapRound];
     [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
                                   lerp([current vertexY], [next vertexY], animationRatio) + [self origY])];

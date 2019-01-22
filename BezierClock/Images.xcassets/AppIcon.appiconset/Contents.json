@@ -101,7 +101,11 @@
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
+<<<<<<< Updated upstream
       "filename" : "appStore.png",
+=======
+      "filename" : "iTunesArtwork@2x.png",
+>>>>>>> Stashed changes
       "scale" : "1x"
     }
   ],
