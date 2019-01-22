@@ -47,8 +47,8 @@
             [userDefaults setBool:YES forKey:@"initialized"];
 
             // http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
-            NSData *lineColorData       = [NSKeyedArchiver archivedDataWithRootObject:[UIColor blackColor]];
-            NSData *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:[UIColor grayColor]];
+            NSData *lineColorData       = [NSKeyedArchiver archivedDataWithRootObject:[UIColor blackColor] requiringSecureCoding:NO error:nil];
+            NSData *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:[UIColor grayColor] requiringSecureCoding:NO error:nil];
 
             [userDefaults setBool:NO                    forKey:@"drawControlLines"];
             [userDefaults setBool:NO                    forKey:@"continualAnimation"];
@@ -74,9 +74,9 @@
         // 1 for linear, 2 for quadratic, 3 for cubic, 4 for sinuisoidial
         _animationType              = [userDefaults integerForKey:@"animationType"];
         _animDurationUser           = [userDefaults floatForKey:@"animDurationUser"];
-        _lineColor                  = [NSKeyedUnarchiver unarchiveObjectWithData:lineColorData];
+        _lineColor                  = [NSKeyedUnarchiver unarchivedObjectOfClass:[UIColor class] fromData:lineColorData error:nil];
         _lineSize                   = [userDefaults floatForKey:@"lineSize"];
-        _bgColor                    = [NSKeyedUnarchiver unarchiveObjectWithData:backgroundColorData];
+        _bgColor                    = [NSKeyedUnarchiver unarchivedObjectOfClass:[UIColor class] fromData:backgroundColorData error:nil];
 
         [BezierDigitAnimator setDrawControlLines:_drawControlLines];
         [BezierDigitAnimator setContinualAnimation:_continualAnimation];
@@ -171,7 +171,7 @@
     [BezierDigitAnimator setLineColor:color];
 
     NSUserDefaults *userDefaults  = [NSUserDefaults standardUserDefaults];
-    NSData         *lineColorData = [NSKeyedArchiver archivedDataWithRootObject:color];
+    NSData         *lineColorData = [NSKeyedArchiver archivedDataWithRootObject:color requiringSecureCoding:NO error:nil];
     [userDefaults setObject:lineColorData forKey:@"lineColor"];
 }
 
@@ -189,7 +189,7 @@
     _bgColor = backgroundColor;
 
     NSUserDefaults *userDefaults        = [NSUserDefaults standardUserDefaults];
-    NSData         *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:backgroundColor];
+    NSData         *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:backgroundColor requiringSecureCoding:NO error:nil];
     [userDefaults setObject:backgroundColorData forKey:@"backgroundColor"];
 }
 

@@ -4,7 +4,7 @@
 //
 //  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
 //  by Philip Schneider on 1/1/15.
-//  Copyright (c) 2015 Code From Above, LLC. All rights reserved.
+//  Copyright (c) 2015-2019 Code From Above, LLC. All rights reserved.
 //
 
 #import "BezierDigitAnimator.h"
