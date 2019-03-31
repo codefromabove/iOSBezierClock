@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l6X-an-KYy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l6X-an-KYy">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,14 +14,11 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="vfZ-oL-JX2"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems>
@@ -50,10 +48,6 @@
         <scene sceneID="b39-3R-Sc2">
             <objects>
                 <viewController modalPresentationStyle="pageSheet" id="PPK-ZQ-ejv" customClass="DisplayOptionsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cfq-c1-dbV"/>
-                        <viewControllerLayoutGuide type="bottom" id="3ai-Fi-bQT"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" placeholderIntrinsicWidth="180" placeholderIntrinsicHeight="44" id="Wa1-60-Z5r">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,10 +185,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="PlD-kc-Ywb" secondAttribute="centerX" id="Ys1-lS-kb1"/>
-                            <constraint firstItem="PlD-kc-Ywb" firstAttribute="top" secondItem="cfq-c1-dbV" secondAttribute="bottom" id="cXk-UO-Xhk"/>
-                            <constraint firstItem="3ai-Fi-bQT" firstAttribute="top" secondItem="PlD-kc-Ywb" secondAttribute="bottom" id="pFC-sg-JWD"/>
+                            <constraint firstItem="PlD-kc-Ywb" firstAttribute="centerX" secondItem="Xut-zi-Al9" secondAttribute="centerX" id="Ys1-lS-kb1"/>
+                            <constraint firstItem="PlD-kc-Ywb" firstAttribute="top" secondItem="Xut-zi-Al9" secondAttribute="top" id="cXk-UO-Xhk"/>
+                            <constraint firstItem="PlD-kc-Ywb" firstAttribute="bottom" secondItem="Xut-zi-Al9" secondAttribute="bottom" id="pFC-sg-JWD"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Xut-zi-Al9"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Drawing Options" id="jnw-fl-lVG">
@@ -224,14 +219,11 @@
         <scene sceneID="Xzy-oV-Xjh">
             <objects>
                 <viewController id="syM-wx-ClC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mQM-9e-UWb"/>
-                        <viewControllerLayoutGuide type="bottom" id="LEV-k1-UIN"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iy3-e0-F5f" customClass="NKOColorPickerView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="YKt-YR-dOa"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="cHO-3G-Iph">
@@ -254,10 +246,6 @@
         <scene sceneID="cuQ-H7-AYf">
             <objects>
                 <viewController id="Ggo-ZJ-d39" customClass="AnimationOptionsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NSP-XL-sFa"/>
-                        <viewControllerLayoutGuide type="bottom" id="Spq-cz-88G"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sDF-Ry-WEY">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="172"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -317,10 +305,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5wk-vA-86a" firstAttribute="top" secondItem="sDF-Ry-WEY" secondAttribute="topMargin" id="4bC-BK-CrB"/>
-                            <constraint firstItem="5wk-vA-86a" firstAttribute="centerX" secondItem="sDF-Ry-WEY" secondAttribute="centerX" id="6ey-ag-ipn"/>
-                            <constraint firstItem="5wk-vA-86a" firstAttribute="bottom" secondItem="sDF-Ry-WEY" secondAttribute="bottomMargin" id="IDh-li-XIH"/>
+                            <constraint firstItem="5wk-vA-86a" firstAttribute="top" secondItem="NFl-Od-mWf" secondAttribute="top" id="4bC-BK-CrB"/>
+                            <constraint firstItem="5wk-vA-86a" firstAttribute="centerX" secondItem="NFl-Od-mWf" secondAttribute="centerX" id="6ey-ag-ipn"/>
+                            <constraint firstItem="5wk-vA-86a" firstAttribute="bottom" secondItem="NFl-Od-mWf" secondAttribute="bottom" id="IDh-li-XIH"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="NFl-Od-mWf"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Animation Options" id="qGV-Tu-b1P">
