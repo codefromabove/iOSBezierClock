@@ -52,7 +52,7 @@ CGFloat const NKOPickerViewBrightnessIndicatorWidth     = 16.f;
 CGFloat const NKOPickerViewBrightnessIndicatorHeight    = 48.f;
 CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
 
-@interface NKOColorPickerView() {
+@interface NKOColorPickerView() <UIGestureRecognizerDelegate> {
 	CGFloat currentBrightness;
 	CGFloat currentHue;
 	CGFloat currentSaturation;
@@ -62,6 +62,8 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
 @property (nonatomic, strong) UIImageView *brightnessIndicator;
 @property (nonatomic, strong) UIImageView *hueSatImage;
 @property (nonatomic, strong) UIView *crossHairs;
+@property (nonatomic, strong) UIGestureRecognizer *gradientViewGestureRecognizer;
+@property (nonatomic, strong) UIGestureRecognizer *hueSatImageGestureRecognizer;
 
 @end
 
@@ -247,32 +249,28 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
     return [UIColor whiteColor];
 }
 
-#pragma mark - Touch Handling methods
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+#pragma mark - Gesture Recognizers
+
+- (void)dragGradient:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-	for (UITouch *touch in touches){
-		[self dispatchTouchEvent:[touch locationInView:self]];
+    CGPoint position = [panGestureRecognizer locationInView:self];
+
+    if (CGRectContainsPoint(self.gradientView.frame, position)) {
+        self.brightnessIndicator.center = CGPointMake(position.x, self.gradientView.center.y);
+        [self _updateBrightnessWithMovement:position];
     }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)dragHueSat:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-	for (UITouch *touch in touches){
-		[self dispatchTouchEvent:[touch locationInView:self]];
-	}
+    CGPoint position = [panGestureRecognizer locationInView:self];
+
+    if (CGRectContainsPoint(self.hueSatImage.frame, position)) {
+        self.crossHairs.center = position;
+        [self _updateHueSatWithMovement:position];
+    }
 }
 
-- (void)dispatchTouchEvent:(CGPoint)position
-{
-	if (CGRectContainsPoint(self.hueSatImage.frame,position)){
-        self.crossHairs.center = position;
-		[self _updateHueSatWithMovement:position];
-	}
-    else if (CGRectContainsPoint(self.gradientView.frame, position)) {
-        self.brightnessIndicator.center = CGPointMake(position.x, self.gradientView.center.y);
-		[self _updateBrightnessWithMovement:position];
-	}
-}
 
 #pragma mark - Lazy loading
 - (NKOBrightnessView*)gradientView
@@ -290,6 +288,10 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
         self->_gradientView.layer.cornerRadius = 6.f;
         self->_gradientView.layer.borderColor = [self _defaultTintColor].CGColor;
         self->_gradientView.layer.masksToBounds = YES;
+
+        self.gradientViewGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragGradient:)];
+        self.gradientViewGestureRecognizer.delegate = self;
+        [self->_gradientView addGestureRecognizer:self.gradientViewGestureRecognizer];
     }
     
     if (self->_gradientView.superview == nil){
@@ -314,6 +316,11 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
         self->_hueSatImage.layer.cornerRadius = 6.f;
         self->_hueSatImage.layer.borderColor = [self _defaultTintColor].CGColor;
         self->_hueSatImage.layer.masksToBounds = YES;
+
+        self.hueSatImageGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragHueSat:)];
+        self.hueSatImageGestureRecognizer.delegate = self;
+        [self->_hueSatImage addGestureRecognizer:self.hueSatImageGestureRecognizer];
+        self->_hueSatImage.userInteractionEnabled = YES;
     }
     
     if (self->_hueSatImage.superview == nil){
