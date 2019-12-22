@@ -62,8 +62,11 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
 @property (nonatomic, strong) UIImageView *brightnessIndicator;
 @property (nonatomic, strong) UIImageView *hueSatImage;
 @property (nonatomic, strong) UIView *crossHairs;
-@property (nonatomic, strong) UIGestureRecognizer *gradientViewGestureRecognizer;
-@property (nonatomic, strong) UIGestureRecognizer *hueSatImageGestureRecognizer;
+@property (nonatomic, strong) UIGestureRecognizer *gradientViewPanGestureRecognizer;
+@property (nonatomic, strong) UIGestureRecognizer *hueSatImagePanGestureRecognizer;
+
+@property (nonatomic, strong) UIGestureRecognizer *gradientViewTapGestureRecognizer;
+@property (nonatomic, strong) UIGestureRecognizer *hueSatImageTapGestureRecognizer;
 
 @end
 
@@ -277,6 +280,25 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
     }
 }
 
+- (void)tapGradient:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    CGPoint position = [tapGestureRecognizer locationInView:self];
+
+    if (CGRectContainsPoint(self.gradientView.frame, position)) {
+        self.brightnessIndicator.center = CGPointMake(position.x, self.gradientView.center.y);
+        [self _updateBrightnessWithMovement:position];
+    }
+}
+
+- (void)tapHueSat:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    CGPoint position = [tapGestureRecognizer locationInView:self];
+
+    if (CGRectContainsPoint(self.hueSatImage.frame, position)) {
+        self.crossHairs.center = position;
+        [self _updateHueSatWithMovement:position];
+    }
+}
 
 #pragma mark - Lazy loading
 - (NKOBrightnessView*)gradientView
@@ -295,9 +317,13 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
         self->_gradientView.layer.borderColor = [self _defaultTintColor].CGColor;
         self->_gradientView.layer.masksToBounds = YES;
 
-        self.gradientViewGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragGradient:)];
-        self.gradientViewGestureRecognizer.delegate = self;
-        [self->_gradientView addGestureRecognizer:self.gradientViewGestureRecognizer];
+        self.gradientViewPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragGradient:)];
+        self.gradientViewPanGestureRecognizer.delegate = self;
+        [self->_gradientView addGestureRecognizer:self.gradientViewPanGestureRecognizer];
+
+        self.gradientViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGradient:)];
+        self.gradientViewTapGestureRecognizer.delegate = self;
+        [self->_gradientView addGestureRecognizer:self.gradientViewTapGestureRecognizer];
     }
     
     if (self->_gradientView.superview == nil){
@@ -323,9 +349,14 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
         self->_hueSatImage.layer.borderColor = [self _defaultTintColor].CGColor;
         self->_hueSatImage.layer.masksToBounds = YES;
 
-        self.hueSatImageGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragHueSat:)];
-        self.hueSatImageGestureRecognizer.delegate = self;
-        [self->_hueSatImage addGestureRecognizer:self.hueSatImageGestureRecognizer];
+        self.hueSatImagePanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragHueSat:)];
+        self.hueSatImagePanGestureRecognizer.delegate = self;
+        [self->_hueSatImage addGestureRecognizer:self.hueSatImagePanGestureRecognizer];
+
+        self.hueSatImageTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHueSat:)];
+        self.hueSatImageTapGestureRecognizer.delegate = self;
+        [self->_hueSatImage addGestureRecognizer:self.hueSatImageTapGestureRecognizer];
+
         self->_hueSatImage.userInteractionEnabled = YES;
     }
     
