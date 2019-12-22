@@ -47,8 +47,8 @@
             [userDefaults setBool:YES forKey:@"initialized"];
 
             // http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
-            NSData *lineColorData       = [NSKeyedArchiver archivedDataWithRootObject:[UIColor blackColor] requiringSecureCoding:NO error:nil];
-            NSData *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:[UIColor grayColor] requiringSecureCoding:NO error:nil];
+            NSData *lineColorData       = [NSKeyedArchiver archivedDataWithRootObject:[UIColor labelColor] requiringSecureCoding:NO error:nil];
+            NSData *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:[UIColor systemBackgroundColor] requiringSecureCoding:NO error:nil];
 
             [userDefaults setBool:NO                    forKey:@"drawControlLines"];
             [userDefaults setBool:NO                    forKey:@"continualAnimation"];

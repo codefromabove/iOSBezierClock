@@ -7,7 +7,7 @@
 //
 #import "DisplayOptionsViewController.h"
 #import "BezierClockView.h"
-#import "NKOColorPickerView.h"
+#import "NKOColorPickerViewController.h"
 
 @interface DisplayOptionsViewController ()
 
@@ -70,7 +70,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UINavigationController *nav = (UINavigationController *)[segue destinationViewController];
+    NKOColorPickerViewController *vc = (NKOColorPickerViewController *)[segue destinationViewController];
 
     //
     // Update color picker to current BezierCurveView values, and assign block to
@@ -78,23 +78,15 @@
     //
     if ([[segue identifier] isEqualToString:@"BackgroundColorPickerSegue"])
     {
-        NKOColorPickerView *cpView = (NKOColorPickerView *)[[nav topViewController] view];
-        [cpView setColor:[[self bcView] backgroundColor]];
-        [cpView setDidChangeColorBlock:^(UIColor *color)
-        {
-            [[self backgroundColorSwatchOutlet] setBackgroundColor:color];
-            [[self bcView] setBgColor:color];
-        }];
+        [vc setBcView:[self bcView]];
+        [vc setEditMode:kBackgroundColorEditMode];
+        [vc setDisplayOptionsViewController:self];
     }
     else if ([[segue identifier] isEqualToString:@"LineColorPickerSegue"])
     {
-        NKOColorPickerView *cpView = (NKOColorPickerView *)[[nav topViewController] view];
-        [cpView setColor:[[self bcView] lineColor]];
-        [cpView setDidChangeColorBlock:^(UIColor *color)
-        {
-            [[self lineColorSwatchOutlet] setBackgroundColor:color];
-            [[self bcView] setLineColor:color];
-        }];
+        [vc setBcView:[self bcView]];
+        [vc setEditMode:kLineColorEditMode];
+        [vc setDisplayOptionsViewController:self];
     }
 }
 
@@ -126,6 +118,16 @@
 - (IBAction)doneAction:(id)sender
 {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)setLineSwatchColor:(UIColor *)lineSwatchColor
+{
+    [self.lineColorSwatchOutlet setBackgroundColor:lineSwatchColor];
+}
+
+- (void)setBackgroundSwatchColor:(UIColor *)bgSwatchColor
+{
+    [self.backgroundColorSwatchOutlet setBackgroundColor:bgSwatchColor];
 }
 
 @end

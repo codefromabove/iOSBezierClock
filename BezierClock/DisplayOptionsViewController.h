@@ -12,6 +12,8 @@
 
 @interface DisplayOptionsViewController : UIViewController
 
-@property (weak, nonatomic) BezierClockView *bcView;
+@property (weak, nonatomic)   BezierClockView *bcView;
+@property (strong, nonatomic) UIColor         *lineSwatchColor;
+@property (strong, nonatomic) UIColor         *backgroundSwatchColor;
 
 @end

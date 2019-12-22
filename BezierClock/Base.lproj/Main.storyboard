@@ -99,7 +99,7 @@
                                             <constraint firstAttribute="width" constant="65" id="nwQ-f3-eCp"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="h6H-UZ-6X2" kind="presentation" identifier="BackgroundColorPickerSegue" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="DpY-Sq-Ns3"/>
+                                            <segue destination="syM-wx-ClC" kind="show" identifier="BackgroundColorPickerSegue" id="uj4-ju-hMg"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxP-0R-Vmn">
@@ -118,7 +118,7 @@
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="h6H-UZ-6X2" kind="presentation" identifier="LineColorPickerSegue" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="22p-oH-f4q"/>
+                                            <segue destination="syM-wx-ClC" kind="show" identifier="LineColorPickerSegue" id="diZ-uk-SdE"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njr-zW-Hga">
@@ -207,15 +207,26 @@
             </objects>
             <point key="canvasLocation" x="916" y="919"/>
         </scene>
-        <!--View Controller-->
+        <!--Color Picker View Controller-->
         <scene sceneID="Xzy-oV-Xjh">
             <objects>
-                <viewController id="syM-wx-ClC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iy3-e0-F5f" customClass="NKOColorPickerView">
+                <viewController id="syM-wx-ClC" customClass="NKOColorPickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJu-De-zRR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="YKt-YR-dOa"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ekf-8l-bg3" customClass="NKOColorPickerView">
+                                <rect key="frame" x="20" y="20" width="374" height="746"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ekf-8l-bg3" firstAttribute="leading" secondItem="YJu-De-zRR" secondAttribute="leading" constant="20" symbolic="YES" id="DJJ-T3-itR"/>
+                            <constraint firstAttribute="trailing" secondItem="Ekf-8l-bg3" secondAttribute="trailing" constant="20" symbolic="YES" id="ODK-Xr-lCJ"/>
+                            <constraint firstAttribute="bottom" secondItem="Ekf-8l-bg3" secondAttribute="bottom" constant="20" symbolic="YES" id="g2S-7Z-Drt"/>
+                            <constraint firstItem="Ekf-8l-bg3" firstAttribute="top" secondItem="YJu-De-zRR" secondAttribute="top" constant="20" symbolic="YES" id="j8s-FG-vEA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0fP-tB-vxi"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="cHO-3G-Iph">
@@ -228,11 +239,15 @@
                             <outlet property="backBarButtonItem" destination="1z9-lW-miq" id="cxK-Su-pjT"/>
                         </connections>
                     </navigationItem>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <connections>
+                        <outlet property="colorPicker" destination="Ekf-8l-bg3" id="BWG-Vi-fcy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4cU-Cm-jHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Rjo-Mb-0Er" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2690" y="919"/>
+            <point key="canvasLocation" x="2045" y="919"/>
         </scene>
         <!--Animation Options-->
         <scene sceneID="cuQ-H7-AYf">
@@ -382,31 +397,12 @@
             </objects>
             <point key="canvasLocation" x="1593" y="169"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nDU-qJ-uHc">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h6H-UZ-6X2" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="ao8-Lf-MVy"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Z5-uf-ByD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="syM-wx-ClC" kind="relationship" relationship="rootViewController" id="Jza-SH-C3N"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xew-qv-pZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1864" y="919"/>
-        </scene>
     </scenes>
     <resources>
         <image name="animationOptions_29x29.png" width="29" height="29"/>
         <image name="drawingOptions_29x29.png" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DpY-Sq-Ns3"/>
+        <segue reference="diZ-uk-SdE"/>
     </inferredMetricsTieBreakers>
 </document>

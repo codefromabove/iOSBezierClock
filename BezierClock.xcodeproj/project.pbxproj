@@ -36,6 +36,8 @@
 		667A64551A54CB22008C45D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A64531A54CB22008C45D7 /* Main.storyboard */; };
 		667A64571A54CB23008C45D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667A64561A54CB23008C45D7 /* Images.xcassets */; };
 		667A645A1A54CB23008C45D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 667A64581A54CB23008C45D7 /* LaunchScreen.xib */; };
+		66836D5B23AFC4680021F1B4 /* NKOColorPickerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */; };
+		66836D5C23AFC4680021F1B4 /* NKOColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */; };
 		66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		667A64541A54CB22008C45D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		667A64561A54CB23008C45D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		667A64591A54CB23008C45D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj.h; name = NKOColorPickerViewController.h; path = BezierClock/NKOColorPickerViewController.h; sourceTree = "<group>"; };
+		66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NKOColorPickerViewController.m; path = BezierClock/NKOColorPickerViewController.m; sourceTree = "<group>"; };
 		66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_83.5x83.5@2x.png"; path = "BezierClock/Images.xcassets/AppIcon.appiconset/icon_83.5x83.5@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -96,9 +100,11 @@
 		66591C851A58615B00774F8E /* NKOColorPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				66591CA61A59B0B900774F8E /* Assets */,
 				66591CA21A59B09300774F8E /* NKOColorPickerView.h */,
 				66591CA31A59B09300774F8E /* NKOColorPickerView.m */,
-				66591CA61A59B0B900774F8E /* Assets */,
+				66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */,
+				66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */,
 			);
 			name = NKOColorPickerView;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66836D5B23AFC4680021F1B4 /* NKOColorPickerViewController.h in Sources */,
 				66591CA11A59B05300774F8E /* BezierDigit.m in Sources */,
 				663DA8EB1A5713E800360116 /* AnimationOptionsViewController.m in Sources */,
 				66571A1C1A54D00500626782 /* BezierClockView.m in Sources */,
@@ -288,6 +295,7 @@
 				66571A221A55AE1800626782 /* BezierDigitAnimator.m in Sources */,
 				667A644F1A54CB22008C45D7 /* AppDelegate.m in Sources */,
 				667A644C1A54CB22008C45D7 /* main.m in Sources */,
+				66836D5C23AFC4680021F1B4 /* NKOColorPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -411,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -428,7 +436,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BezierClock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codefromabove.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -446,7 +453,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BezierClock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codefromabove.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -40,7 +40,7 @@
     // Controllers are embedded in nav controllers
     // Hand them a ref to the BezierClockView
     //
-    UINavigationController *nav  = (UINavigationController *)[segue destinationViewController];
+    UINavigationController *nav = (UINavigationController *)[segue destinationViewController];
 
     if ([[segue identifier] isEqualToString:@"DisplayOptionsSegue"])
     {
@@ -58,12 +58,12 @@
 {
     [[self bcView] setTransitioning:YES];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
-     {
-         // do whatever
-     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
-     {
-         [[self bcView] setTransitioning:NO];
-     }];
+    {
+        // do whatever
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+        [[self bcView] setTransitioning:NO];
+    }];
 
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }

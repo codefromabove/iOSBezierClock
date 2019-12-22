@@ -141,6 +141,12 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
     CGFloat hue, saturation;
     [newColor getHue:&hue saturation:&saturation brightness:nil alpha:nil];
 
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat alpha;
+    [newColor getRed:&red green:&green blue:&blue alpha:&alpha];
+
     currentHue = hue;
     currentSaturation = saturation;
     [self _setColor:newColor];
@@ -349,6 +355,7 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
         self->_crossHairs.layer.shadowOffset = CGSizeZero;
         self->_crossHairs.layer.shadowRadius = 1;
         self->_crossHairs.layer.shadowOpacity = 0.5f;
+        self->_crossHairs.userInteractionEnabled = NO;
     }
     
     if (self->_crossHairs.superview == nil){
