@@ -36,6 +36,7 @@
 		667A64551A54CB22008C45D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A64531A54CB22008C45D7 /* Main.storyboard */; };
 		667A64571A54CB23008C45D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667A64561A54CB23008C45D7 /* Images.xcassets */; };
 		667A645A1A54CB23008C45D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 667A64581A54CB23008C45D7 /* LaunchScreen.xib */; };
+		6681F26623B1139C00099F60 /* launchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6681F26523B1139C00099F60 /* launchIcon.png */; };
 		66836D5B23AFC4680021F1B4 /* NKOColorPickerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */; };
 		66836D5C23AFC4680021F1B4 /* NKOColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */; };
 		66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */; };
@@ -81,6 +82,7 @@
 		667A64541A54CB22008C45D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		667A64561A54CB23008C45D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		667A64591A54CB23008C45D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6681F26523B1139C00099F60 /* launchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchIcon.png; sourceTree = "<group>"; };
 		66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj.h; name = NKOColorPickerViewController.h; path = BezierClock/NKOColorPickerViewController.h; sourceTree = "<group>"; };
 		66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NKOColorPickerViewController.m; path = BezierClock/NKOColorPickerViewController.m; sourceTree = "<group>"; };
 		66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_83.5x83.5@2x.png"; path = "BezierClock/Images.xcassets/AppIcon.appiconset/icon_83.5x83.5@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -112,6 +114,7 @@
 		66591C911A59A5BC00774F8E /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				6681F26523B1139C00099F60 /* launchIcon.png */,
 				66591C9A1A59AF2800774F8E /* animationOptions_29x29.png */,
 				66591C9B1A59AF2800774F8E /* animationOptions_29x29@2x.png */,
 				66591CAD1A59B48600774F8E /* drawingOptions_29x29.png */,
@@ -269,6 +272,7 @@
 				66591C9C1A59AF2800774F8E /* animationOptions_29x29.png in Resources */,
 				66591CCA1A59C58F00774F8E /* icon_60x60@2x.png in Resources */,
 				66591CCB1A59C58F00774F8E /* icon_76x76.png in Resources */,
+				6681F26623B1139C00099F60 /* launchIcon.png in Resources */,
 				66591CC61A59C58F00774F8E /* icon_29x29.png in Resources */,
 				66591CB01A59B48600774F8E /* drawingOptions_29x29@2x.png in Resources */,
 				66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */,
