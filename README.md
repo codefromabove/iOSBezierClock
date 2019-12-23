@@ -1,7 +1,9 @@
 iOSBezierClock
 ==============
 
-I recently stumbled upon Jack Friggard's [Bézier Clock](http://jackf.net/bezier-clock/) web page, which demonstrates his use of [Processing.js](http://processingjs.org/) to show an animated "digital" clock. He links to another page containing his Javascript [code](http://jackf.net/bezier-clock/bezier_clock.pde). All credit for the actual functionality goes to Jack.
+I recently stumbled upon Jack Friggard's [Bézier Clock](http://jackf.net/bezier-clock/) web page, which demonstrates his use of [Processing.js](http://processingjs.org/) to show an animated "digital" clock. He links to another page containing his Javascript [code](http://jackf.net/bezier-clock/bezier_clock.pde). All credit for the actual functionality goes to Jack. 
+
+Update: Jack’s original web pages are MIA, but can be found via the [Internet Archive Wayback Machine](http://archive.org/web/) [here](http://web.archive.org/web/20150415161240/http://jackf.net/bezier-clock/) and [here](http://web.archive.org/web/20150409000842/http://jackf.net/bezier-clock/bezier_clock.pde).
 
 I thought it would be fun to see if I could translate this into an iOS app; this GitHub project is the result of that effort. In truth, this is more of a transliteration than a proper translation...I converted it to Objective-C by creating equivalents to Jack's classes, adding some UIViewControllers and UIViews, and pasting his code in. My goal was to try to simultaneously keep his code and algorithms as intact as possible, while writing fairly "proper" Objective-C. So, what you see here is probably not quite what one would do if one started from scratch on iOS.
 
