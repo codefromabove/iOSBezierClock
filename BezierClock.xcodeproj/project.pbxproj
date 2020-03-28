@@ -37,7 +37,6 @@
 		667A64571A54CB23008C45D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667A64561A54CB23008C45D7 /* Images.xcassets */; };
 		667A645A1A54CB23008C45D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 667A64581A54CB23008C45D7 /* LaunchScreen.xib */; };
 		6681F26623B1139C00099F60 /* launchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6681F26523B1139C00099F60 /* launchIcon.png */; };
-		66836D5B23AFC4680021F1B4 /* NKOColorPickerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */; };
 		66836D5C23AFC4680021F1B4 /* NKOColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */; };
 		66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */; };
 /* End PBXBuildFile section */
@@ -234,10 +233,9 @@
 			};
 			buildConfigurationList = 667A64411A54CB22008C45D7 /* Build configuration list for PBXProject "BezierClock" */;
 			compatibilityVersion = "Xcode 10.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -288,7 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66836D5B23AFC4680021F1B4 /* NKOColorPickerViewController.h in Sources */,
 				66591CA11A59B05300774F8E /* BezierDigit.m in Sources */,
 				663DA8EB1A5713E800360116 /* AnimationOptionsViewController.m in Sources */,
 				66571A1C1A54D00500626782 /* BezierClockView.m in Sources */,
