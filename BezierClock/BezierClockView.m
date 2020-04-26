@@ -108,7 +108,7 @@
         _minutesTensDigit  = [[BezierDigitAnimator alloc] init:(dist += 500) origY:yOff pauseDuration:595.0   animDuration:5.0];
         _minutesUnitsDigit = [[BezierDigitAnimator alloc] init:(dist += 300) origY:yOff pauseDuration:55.0    animDuration:5.0];
         _secondsTensDigit  = [[BezierDigitAnimator alloc] init:(dist += 500) origY:yOff pauseDuration:5.0     animDuration:5.0];
-        _secondsUnitsDigit = [[BezierDigitAnimator alloc] init:(dist += 300) origY:yOff pauseDuration:0.0     animDuration:1.0];
+        _secondsUnitsDigit = [[BezierDigitAnimator alloc] init:(dist +  300) origY:yOff pauseDuration:0.0     animDuration:1.0];
 
         //
         // Animation
@@ -119,7 +119,6 @@
 
     return self;
 }
-
 
 - (void)setDrawControlLines:(BOOL)on
 {
