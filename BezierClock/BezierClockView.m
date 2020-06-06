@@ -141,8 +141,7 @@
 - (void)setShowContinualShadows:(BOOL)on
 {
     _showContinualShadows = on;
-    [BezierDigitAnimator setShowContinualShadows:on]
-    ;
+    [BezierDigitAnimator setShowContinualShadows:on];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:on forKey:@"setShowContinualShadows"];
 }
