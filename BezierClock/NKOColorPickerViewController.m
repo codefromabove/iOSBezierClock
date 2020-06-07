@@ -3,7 +3,7 @@
 //  BezierClock
 //
 //  Created by Philip Schneider on 12/22/19.
-//  Copyright © 2019 Code From Above, LLC. All rights reserved.
+//  Copyright © 2019-2020 Code From Above, LLC. All rights reserved.
 //
 
 #import "NKOColorPickerViewController.h"

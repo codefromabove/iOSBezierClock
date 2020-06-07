@@ -4,7 +4,7 @@
 //
 //  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
 //  by Philip Schneider on 1/1/15.
-//  Copyright (c) 2015-2019 Code From Above, LLC. All rights reserved.
+//  Copyright (c) 2015-2020 Code From Above, LLC. All rights reserved.
 //
 
 #import "BezierDigitAnimator.h"
@@ -27,12 +27,6 @@ static void bezierVertexFromArrayListsRatios(UIBezierPath *path, NSArray *from, 
                                       lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], ratio) + offsetY)];
 }
 
-static UIColor  *lineColor;
-static float     lineSize             = 1.0;
-static BOOL      continualAnimation   = NO;
-static NSInteger animationType        = 4;
-static BOOL      showContinualShadows = NO;
-static BOOL      drawControlLines     = NO;
 
 
 @interface BezierDigitAnimator ()
@@ -40,9 +34,36 @@ static BOOL      drawControlLines     = NO;
 @property (nonatomic) float origX;
 @property (nonatomic) float origY;
 
+@property (class, nonatomic, strong) UIColor  *lineColor;
+@property (class, nonatomic, assign) float     lineSize;
+@property (class, nonatomic, assign) BOOL      continualAnimation;
+@property (class, nonatomic, assign) NSInteger animationType;
+@property (class, nonatomic, assign) BOOL      showContinualShadows;
+@property (class, nonatomic, assign) BOOL      drawControlLines;
+
 @end
 
 @implementation BezierDigitAnimator
+
+static UIColor  *_lineColor;
+static float     _lineSize;
+static BOOL      _continualAnimation;
+static NSInteger _animationType;
+static BOOL      _showContinualShadows;
+static BOOL      _drawControlLines;
+
+
++ (void)initialize
+{
+    if (self == [BezierDigitAnimator class]) {
+        _lineColor            = [UIColor labelColor];
+        _lineSize             = 1.0;
+        _continualAnimation   = NO;
+        _animationType        = 4;
+        _showContinualShadows = NO;
+        _drawControlLines     = NO;
+    }
+}
 
 - (instancetype)init:(float)origX
                origY:(float)origY
@@ -56,43 +77,69 @@ static BOOL      drawControlLines     = NO;
         _origX = origX;
         _origY = origY;
         _animationStartRatio = pauseDuration / (pauseDuration + animDuration);
-        if (!lineColor)
-        {
-            lineColor = [UIColor blackColor];
-        }
     }
 
     return self;
 }
 
++ (UIColor *)lineColor
+{
+    return _lineColor;
+}
+
 + (void)setLineColor:(UIColor *)color
 {
-    lineColor = color;
+    _lineColor = color;
+}
+
++ (float)lineSize
+{
+    return _lineSize;
 }
 
 + (void)setLineSize:(float)size
 {
-    lineSize = size;
+    _lineSize = size;
+}
+
++ (BOOL)continualAnimation
+{
+    return _continualAnimation;
 }
 
 + (void)setContinualAnimation:(BOOL)on
 {
-    continualAnimation = on;
+    _continualAnimation = on;
+}
+
++ (NSInteger)animationType
+{
+    return _animationType;
 }
 
 + (void)setAnimationType:(NSInteger)type
 {
-    animationType = type;
+    _animationType = type;
+}
+
++ (BOOL)showContinualShadows
+{
+    return _showContinualShadows;
 }
 
 + (void)setShowContinualShadows:(BOOL)on
 {
-    showContinualShadows = on;
+    _showContinualShadows = on;
+}
+
++ (BOOL)drawControlLines
+{
+    return _drawControlLines;
 }
 
 + (void)setDrawControlLines:(BOOL)on
 {
-    drawControlLines = on;
+    _drawControlLines = on;
 }
 
 - (void)update:(BezierDigit *)current
@@ -104,7 +151,7 @@ static BOOL      drawControlLines     = NO;
     {
         animationRatio = (ratio - [self animationStartRatio]) / (1 - [self animationStartRatio]);
     }
-    if (continualAnimation)
+    if (_continualAnimation)
     {
         animationRatio = ratio;
     }
@@ -116,17 +163,17 @@ static BOOL      drawControlLines     = NO;
     {
         animationRatio = 1;
     }
-    if (animationType == 2)
+    if (_animationType == 2)
     { // quadratic
         animationRatio = animationRatio * animationRatio;
         ratio = ratio * ratio; // we don't need ratio any more
     }
-    else if (animationType == 3)
+    else if (_animationType == 3)
     { // cubic
         animationRatio = animationRatio * animationRatio * animationRatio;
         ratio = ratio * ratio * ratio;
     }
-    else if (animationType == 4)
+    else if (_animationType == 4)
     { // sinusoidal
         animationRatio = 0.5 * (-cos(animationRatio * M_PI) + 1);
         ratio = 0.5 * (-cos(ratio * M_PI) + 1);
@@ -135,12 +182,12 @@ static BOOL      drawControlLines     = NO;
     //
     // Optional drawing of "shadows" showing continual animation.
     //
-    if (showContinualShadows && !continualAnimation)
+    if (_showContinualShadows && !_continualAnimation)
     {
         UIBezierPath *path = [[UIBezierPath alloc] init];
         [[UIColor lightGrayColor] setStroke];
 
-        [path setLineWidth:5.0 * lineSize];
+        [path setLineWidth:5.0 * _lineSize];
         [path setLineCapStyle:kCGLineCapRound];
         [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
                                       lerp([current vertexY], [next vertexY], ratio) + [self origY])];
@@ -158,11 +205,11 @@ static BOOL      drawControlLines     = NO;
     //
     // Draw the digits
     //
-    const float   rad  = 5 * lineSize; // rectangle width & circle diameter, confusingly..
+    const float   rad  = 5 * _lineSize; // rectangle width & circle diameter, confusingly..
     UIBezierPath *path = [[UIBezierPath alloc] init];
-    [lineColor setStroke];
+    [_lineColor setStroke];
 
-    [path setLineWidth:5.0 * lineSize];
+    [path setLineWidth:5.0 * _lineSize];
     [path setLineCapStyle:kCGLineCapRound];
     [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
                                   lerp([current vertexY], [next vertexY], animationRatio) + [self origY])];
@@ -178,7 +225,7 @@ static BOOL      drawControlLines     = NO;
     //
     // Optional rendering of control points/lines
     //
-    if (drawControlLines)
+    if (_drawControlLines)
     {
         CGContextRef    context    = UIGraphicsGetCurrentContext();
         CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
@@ -196,7 +243,7 @@ static BOOL      drawControlLines     = NO;
         CGColorRef colorBlue        = CGColorCreate(colorspace, componentsBlue);
 
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-        CGContextSetLineWidth(context, 1.5 * lineSize);
+        CGContextSetLineWidth(context, 1.5 * _lineSize);
 
         for (int i = 0; i < 4; i++)
         {
