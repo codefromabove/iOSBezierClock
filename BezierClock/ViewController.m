@@ -27,6 +27,14 @@
 
     [[self bcView] setAutoresizesSubviews:YES];
     [[self bcView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+        [appearance configureWithDefaultBackground];
+        UINavigationBar.appearance.standardAppearance = appearance;
+        UINavigationBar.appearance.compactAppearance = appearance;
+        UINavigationBar.appearance.scrollEdgeAppearance = appearance;
+    }
 }
 
 - (BOOL)prefersStatusBarHidden
