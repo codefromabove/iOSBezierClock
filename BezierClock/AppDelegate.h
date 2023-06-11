@@ -3,7 +3,7 @@
 //  BezierClock
 //
 //  Created by Philip Schneider on 12/31/14.
-//  Copyright (c) 2014-2020 Code From Above, LLC. All rights reserved.
+//  Copyright (c) 2014-2023 Code From Above, LLC. All rights reserved.
 //
 #import <UIKit/UIKit.h>
 
