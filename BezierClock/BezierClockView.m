@@ -244,13 +244,17 @@
     //
     // Time display is about 2400x300. Scale so it fits...
     //
-    CGContextRef ctx       = UIGraphicsGetCurrentContext();
-    CGRect       bounds    = [self bounds];
-    const float  scale     = bounds.size.width / 2400;
+    CGContextRef ctx        = UIGraphicsGetCurrentContext();
+    CGRect       bounds     = [self bounds];
+    UIEdgeInsets safeInsets  = [self safeAreaInsets];
+    CGRect       safeArea   = UIEdgeInsetsInsetRect(bounds, safeInsets);
+    const float  scale      = safeArea.size.width / 2400;
 
     //
     // Tweak transform for device rotation.
     //
+    CGContextTranslateCTM(ctx, safeInsets.left, 0);
+
     if (self.transitioning)
     {
         CGRect      presentationLayerBounds = [self.layer.presentationLayer bounds];

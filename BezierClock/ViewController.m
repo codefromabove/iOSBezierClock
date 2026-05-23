@@ -22,6 +22,9 @@
 {
     [super viewDidLoad];
 
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+
     [self setBcView:[[BezierClockView alloc] initWithFrame:[[self view] bounds]]];
     [[self view] addSubview:_bcView];
 
