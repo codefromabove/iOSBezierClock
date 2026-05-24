@@ -4,7 +4,7 @@
 //
 //  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
 //  by Philip Schneider on 12/31/14.
-//  Copyright (c) 2014-2023 Code From Above, LLC. All rights reserved.
+//  Copyright (c) 2014-2026 Code From Above, LLC. All rights reserved.
 //
 
 #import "BezierClockView.h"
@@ -142,6 +142,7 @@
 {
     _showContinualShadows = on;
     [BezierDigitAnimator setShowContinualShadows:on];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:on forKey:@"setShowContinualShadows"];
 }
@@ -246,7 +247,7 @@
     //
     CGContextRef ctx        = UIGraphicsGetCurrentContext();
     CGRect       bounds     = [self bounds];
-    UIEdgeInsets safeInsets  = [self safeAreaInsets];
+    UIEdgeInsets safeInsets = [self safeAreaInsets];
     CGRect       safeArea   = UIEdgeInsetsInsetRect(bounds, safeInsets);
     const float  scale      = safeArea.size.width / 2400;
 
@@ -271,7 +272,6 @@
         CGContextScaleCTM(ctx, scale, scale);
         CGContextTranslateCTM(ctx, 0, translate);
     }
-
 
     //
     // Date
@@ -330,14 +330,13 @@
 
     if (hoursTen == 2 && hoursUnit == 3) {
         hoursUnitNext = 0;
-        hoursTenRatio = (hoursUnit * 3600000 + minuteTotal * 60000 + secondTotal * 1000 + millis) / ( 4 * 3600000.0); // because only 20, 21, 22, 23 and not up to 29
+        hoursTenRatio = (hoursUnit * 3600000 + minuteTotal * 60000 + secondTotal * 1000 + millis) / (4 * 3600000.0); // because only 20, 21, 22, 23 and not up to 29
         [[self hoursTensDigit] setAnimationStartRatio:[self getAnimStartRatio:3600 * 4]];
 
     } else {
         hoursUnitNext = [self getNextInt:hoursUnit max:9];
         hoursTenRatio = (hoursUnit * 3600000 + minuteTotal * 60000 + secondTotal * 1000 + millis) / 36000000.0;
         [[self hoursTensDigit] setAnimationStartRatio:[self getAnimStartRatio:3600 * 10]];
-
     }
 
     [[self hoursTensDigit] update:[[self digits] objectAtIndex:hoursTen]

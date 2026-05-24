@@ -4,7 +4,7 @@
 //
 //  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
 //  by Philip Schneider on 1/1/15.
-//  Copyright (c) 2015-2023 Code From Above, LLC. All rights reserved.
+//  Copyright (c) 2015-2026 Code From Above, LLC. All rights reserved.
 //
 
 #import "BezierDigitAnimator.h"
@@ -26,8 +26,6 @@ static void bezierVertexFromArrayListsRatios(UIBezierPath *path, NSArray *from, 
             controlPoint2:CGPointMake(lerp([[from objectAtIndex:2] floatValue], [[to objectAtIndex:2] floatValue], ratio) + offsetX,
                                       lerp([[from objectAtIndex:3] floatValue], [[to objectAtIndex:3] floatValue], ratio) + offsetY)];
 }
-
-
 
 @interface BezierDigitAnimator ()
 
@@ -51,7 +49,6 @@ static BOOL      _continualAnimation;
 static NSInteger _animationType;
 static BOOL      _showContinualShadows;
 static BOOL      _drawControlLines;
-
 
 + (void)initialize
 {

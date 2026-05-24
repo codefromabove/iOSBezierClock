@@ -3,7 +3,7 @@
 //  BezierClock
 //
 //  Created by Philip Schneider on 12/31/14.
-//  Copyright (c) 2014-2023 Code From Above, LLC. All rights reserved.
+//  Copyright (c) 2014-2026 Code From Above, LLC. All rights reserved.
 //
 #import "ViewController.h"
 #import "BezierClockView.h"
@@ -68,6 +68,17 @@
         AnimationOptionsViewController *aoVC = (AnimationOptionsViewController *)[nav topViewController];
         [aoVC setBcView:[self bcView]];
     }
+
+    if (@available(iOS 15.0, *))
+    {
+        UISheetPresentationController *sheet = [nav sheetPresentationController];
+        if (sheet)
+        {
+            [sheet setDetents:@[[UISheetPresentationControllerDetent mediumDetent],
+                                [UISheetPresentationControllerDetent largeDetent]]];
+            [sheet setPrefersGrabberVisible:YES];
+        }
+    }
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -83,6 +94,5 @@
 
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
-
 
 @end
