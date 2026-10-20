@@ -38,6 +38,7 @@
 		667A645A1A54CB23008C45D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 667A64581A54CB23008C45D7 /* LaunchScreen.xib */; };
 		6681F26623B1139C00099F60 /* launchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6681F26523B1139C00099F60 /* launchIcon.png */; };
 		66836D5C23AFC4680021F1B4 /* NKOColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */; };
+		668D93BC3087D61C007C6668 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 668D93BB3087D61C007C6668 /* SceneDelegate.m */; };
 		66BEB4191DE2119900E1C65B /* icon_83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		6681F26523B1139C00099F60 /* launchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchIcon.png; sourceTree = "<group>"; };
 		66836D5923AFC4680021F1B4 /* NKOColorPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj.h; name = NKOColorPickerViewController.h; path = BezierClock/NKOColorPickerViewController.h; sourceTree = "<group>"; };
 		66836D5A23AFC4680021F1B4 /* NKOColorPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NKOColorPickerViewController.m; path = BezierClock/NKOColorPickerViewController.m; sourceTree = "<group>"; };
+		668D93BA3087D61B007C6668 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		668D93BB3087D61C007C6668 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		66BEB4181DE2119900E1C65B /* icon_83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_83.5x83.5@2x.png"; path = "BezierClock/Images.xcassets/AppIcon.appiconset/icon_83.5x83.5@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -183,6 +186,8 @@
 				667A64491A54CB22008C45D7 /* Supporting Files */,
 				667A64501A54CB22008C45D7 /* ViewController.h */,
 				667A64511A54CB22008C45D7 /* ViewController.m */,
+				668D93BA3087D61B007C6668 /* SceneDelegate.h */,
+				668D93BB3087D61C007C6668 /* SceneDelegate.m */,
 			);
 			path = BezierClock;
 			sourceTree = "<group>";
@@ -223,7 +228,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2650;
+				LastUpgradeCheck = 2710;
 				ORGANIZATIONNAME = "Code From Above, LLC";
 				TargetAttributes = {
 					667A64451A54CB22008C45D7 = {
@@ -293,6 +298,7 @@
 				663DA8E71A56FC1700360116 /* DisplayOptionsViewController.m in Sources */,
 				66591CA51A59B09300774F8E /* NKOColorPickerView.m in Sources */,
 				667A64521A54CB22008C45D7 /* ViewController.m in Sources */,
+				668D93BC3087D61C007C6668 /* SceneDelegate.m in Sources */,
 				66571A221A55AE1800626782 /* BezierDigitAnimator.m in Sources */,
 				667A644F1A54CB22008C45D7 /* AppDelegate.m in Sources */,
 				667A644C1A54CB22008C45D7 /* main.m in Sources */,
@@ -326,6 +332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -386,6 +393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -443,6 +451,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BezierClock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,6 +472,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BezierClock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
