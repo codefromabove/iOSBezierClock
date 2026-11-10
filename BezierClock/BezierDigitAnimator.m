@@ -32,13 +32,6 @@ static void bezierVertexFromArrayListsRatios(UIBezierPath *path, NSArray *from, 
 @property (nonatomic) float origX;
 @property (nonatomic) float origY;
 
-@property (class, nonatomic, strong) UIColor  *lineColor;
-@property (class, nonatomic, assign) float     lineSize;
-@property (class, nonatomic, assign) BOOL      continualAnimation;
-@property (class, nonatomic, assign) NSInteger animationType;
-@property (class, nonatomic, assign) BOOL      showContinualShadows;
-@property (class, nonatomic, assign) BOOL      drawControlLines;
-
 @end
 
 @implementation BezierDigitAnimator
@@ -84,9 +77,9 @@ static BOOL      _drawControlLines;
     return _lineColor;
 }
 
-+ (void)setLineColor:(UIColor *)color
++ (void)setLineColor:(UIColor *)lineColor
 {
-    _lineColor = color;
+    _lineColor = lineColor;
 }
 
 + (float)lineSize
@@ -94,9 +87,9 @@ static BOOL      _drawControlLines;
     return _lineSize;
 }
 
-+ (void)setLineSize:(float)size
++ (void)setLineSize:(float)lineSize
 {
-    _lineSize = size;
+    _lineSize = lineSize;
 }
 
 + (BOOL)continualAnimation
@@ -104,9 +97,9 @@ static BOOL      _drawControlLines;
     return _continualAnimation;
 }
 
-+ (void)setContinualAnimation:(BOOL)on
++ (void)setContinualAnimation:(BOOL)continualAnimation
 {
-    _continualAnimation = on;
+    _continualAnimation = continualAnimation;
 }
 
 + (NSInteger)animationType
@@ -114,9 +107,9 @@ static BOOL      _drawControlLines;
     return _animationType;
 }
 
-+ (void)setAnimationType:(NSInteger)type
++ (void)setAnimationType:(NSInteger)animationType
 {
-    _animationType = type;
+    _animationType = animationType;
 }
 
 + (BOOL)showContinualShadows
@@ -124,9 +117,9 @@ static BOOL      _drawControlLines;
     return _showContinualShadows;
 }
 
-+ (void)setShowContinualShadows:(BOOL)on
++ (void)setShowContinualShadows:(BOOL)showContinualShadows
 {
-    _showContinualShadows = on;
+    _showContinualShadows = showContinualShadows;
 }
 
 + (BOOL)drawControlLines
@@ -134,9 +127,9 @@ static BOOL      _drawControlLines;
     return _drawControlLines;
 }
 
-+ (void)setDrawControlLines:(BOOL)on
++ (void)setDrawControlLines:(BOOL)drawControlLines
 {
-    _drawControlLines = on;
+    _drawControlLines = drawControlLines;
 }
 
 - (void)update:(BezierDigit *)current

@@ -15,6 +15,13 @@
 
 @property (nonatomic) float animationStartRatio;
 
+@property (class, nonatomic, strong) UIColor  *lineColor;
+@property (class, nonatomic, assign) float     lineSize;
+@property (class, nonatomic, assign) BOOL      continualAnimation;
+@property (class, nonatomic, assign) NSInteger animationType;
+@property (class, nonatomic, assign) BOOL      showContinualShadows;
+@property (class, nonatomic, assign) BOOL      drawControlLines;
+
 - (instancetype)init:(float)origX
                origY:(float)origY
        pauseDuration:(float)pauseDuration
@@ -23,12 +30,5 @@
 - (void)update:(BezierDigit *)current
           next:(BezierDigit *)next
          ratio:(float)ratio;
-
-+ (void)setLineColor:(UIColor *)color;
-+ (void)setLineSize:(float)size;
-+ (void)setContinualAnimation:(BOOL)on;
-+ (void)setAnimationType:(NSInteger)type;
-+ (void)setShowContinualShadows:(BOOL)on;
-+ (void)setDrawControlLines:(BOOL)on;
 
 @end
