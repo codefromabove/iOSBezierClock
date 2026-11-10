@@ -36,12 +36,18 @@ static void bezierVertexFromArrayListsRatios(UIBezierPath *path, NSArray *from, 
 
 @implementation BezierDigitAnimator
 
-static UIColor  *_lineColor;
-static float     _lineSize;
-static BOOL      _continualAnimation;
-static NSInteger _animationType;
-static BOOL      _showContinualShadows;
-static BOOL      _drawControlLines;
+static UIColor            *_lineColor;
+static float               _lineSize;
+static BOOL                _continualAnimation;
+static BezierAnimationType _animationType;
+static BOOL                _showContinualShadows;
+static BOOL                _drawControlLines;
+
+// Colors used when drawing control points/lines
+static UIColor *_controlLineColor;
+static UIColor *_controlRectColor;
+static UIColor *_controlStartLineColor;
+static UIColor *_controlStartRectColor;
 
 + (void)initialize
 {
@@ -49,16 +55,19 @@ static BOOL      _drawControlLines;
         _lineColor            = [UIColor labelColor];
         _lineSize             = 1.0;
         _continualAnimation   = NO;
-        _animationType        = 4;
+        _animationType        = BezierAnimationTypeSinusoidal;
         _showContinualShadows = NO;
         _drawControlLines     = NO;
+
+        _controlLineColor      = [UIColor colorWithRed:230.0/255.0 green:21.0/255.0 blue:21.0/255.0  alpha:1.0];
+        _controlRectColor      = [UIColor colorWithRed:78.0/255.0  green:78.0/255.0 blue:214.0/255.0 alpha:1.0];
+        _controlStartLineColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0];
+        _controlStartRectColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
     }
 }
 
-- (instancetype)init:(float)origX
-               origY:(float)origY
-       pauseDuration:(float)pauseDuration
-        animDuration:(float)animDuration
+- (instancetype)initWithOrigX:(float)origX
+                        origY:(float)origY
 {
     self = [super init];
 
@@ -66,7 +75,6 @@ static BOOL      _drawControlLines;
     {
         _origX = origX;
         _origY = origY;
-        _animationStartRatio = pauseDuration / (pauseDuration + animDuration);
     }
 
     return self;
@@ -102,12 +110,12 @@ static BOOL      _drawControlLines;
     _continualAnimation = continualAnimation;
 }
 
-+ (NSInteger)animationType
++ (BezierAnimationType)animationType
 {
     return _animationType;
 }
 
-+ (void)setAnimationType:(NSInteger)animationType
++ (void)setAnimationType:(BezierAnimationType)animationType
 {
     _animationType = animationType;
 }
@@ -153,18 +161,18 @@ static BOOL      _drawControlLines;
     {
         animationRatio = 1;
     }
-    if (_animationType == 2)
-    { // quadratic
+    if (_animationType == BezierAnimationTypeQuadratic)
+    {
         animationRatio = animationRatio * animationRatio;
         ratio = ratio * ratio; // we don't need ratio any more
     }
-    else if (_animationType == 3)
-    { // cubic
+    else if (_animationType == BezierAnimationTypeCubic)
+    {
         animationRatio = animationRatio * animationRatio * animationRatio;
         ratio = ratio * ratio * ratio;
     }
-    else if (_animationType == 4)
-    { // sinusoidal
+    else if (_animationType == BezierAnimationTypeSinusoidal)
+    {
         animationRatio = 0.5 * (-cos(animationRatio * M_PI) + 1);
         ratio = 0.5 * (-cos(ratio * M_PI) + 1);
     }
@@ -217,20 +225,7 @@ static BOOL      _drawControlLines;
     //
     if (_drawControlLines)
     {
-        CGContextRef    context    = UIGraphicsGetCurrentContext();
-        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-
-        CGFloat    componentsLine[] = { 230.0/255.0, 21.0/255.0, 21.0/255.0, 1.0 };
-        CGColorRef colorLine        = CGColorCreate(colorspace, componentsLine);
-
-        CGFloat    componentsRect[] = { 78.0/255.0, 78.0/255.0, 214.0/255.0, 1.0 };
-        CGColorRef colorRect        = CGColorCreate(colorspace, componentsRect);
-
-        CGFloat    componentsRed[]  = { 255.0/255.0, 0.0/255.0, 0.0/255.0, 1.0 };
-        CGColorRef colorRed         = CGColorCreate(colorspace, componentsRed);
-
-        CGFloat    componentsBlue[] = { 0.0/255.0, 0.0/255.0, 255/255.0, 1.0 };
-        CGColorRef colorBlue        = CGColorCreate(colorspace, componentsBlue);
+        CGContextRef context = UIGraphicsGetCurrentContext();
 
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
         CGContextSetLineWidth(context, 1.5 * _lineSize);
@@ -238,7 +233,7 @@ static BOOL      _drawControlLines;
         for (int i = 0; i < 4; i++)
         {
             // spline lines & circles
-            CGContextSetStrokeColorWithColor(context, colorLine);
+            CGContextSetStrokeColorWithColor(context, _controlLineColor.CGColor);
 
             NSArray *from = [current getControl:i];
             NSArray *to   = [next    getControl:i];
@@ -284,7 +279,7 @@ static BOOL      _drawControlLines;
             }
 
             // control point rectangles
-            CGContextSetStrokeColorWithColor(context, colorRect);
+            CGContextSetStrokeColorWithColor(context, _controlRectColor.CGColor);
             CGRect rect = CGRectMake(lerp([[from objectAtIndex:4] floatValue], [[to objectAtIndex:4] floatValue], animationRatio) + [self origX] - rad/2,
                                      lerp([[from objectAtIndex:5] floatValue], [[to objectAtIndex:5] floatValue], animationRatio) + [self origY] - rad/2,
                                      rad,
@@ -296,7 +291,7 @@ static BOOL      _drawControlLines;
             if (i == 0)
             {
                 // All the edge cases that can't go in the for loop - end points etc.
-                CGContextSetStrokeColorWithColor(context, colorRed);
+                CGContextSetStrokeColorWithColor(context, _controlStartLineColor.CGColor);
 
                 NSArray *fromZero = [current getControl:0];
                 NSArray *toZero   = [next    getControl:0];
@@ -318,7 +313,7 @@ static BOOL      _drawControlLines;
                 CGContextStrokePath(context);
                 CGContextFillEllipseInRect(context, rectangle);
 
-                CGContextSetStrokeColorWithColor(context, colorBlue);
+                CGContextSetStrokeColorWithColor(context, _controlStartRectColor.CGColor);
                 CGRect rect = CGRectMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX] - rad/2,
                                          lerp([current vertexY], [next vertexY], animationRatio) + [self origY] - rad/2,
                                          rad,
@@ -329,13 +324,6 @@ static BOOL      _drawControlLines;
                 CGContextFillRect(context, rect);
             }
         }
-
-        CGColorSpaceRelease(colorspace);
-
-        CGColorRelease(colorLine);
-        CGColorRelease(colorRect);
-        CGColorRelease(colorRed);
-        CGColorRelease(colorBlue);
     }
 }
 

@@ -31,23 +31,16 @@
     [[self bcView] setAutoresizesSubviews:YES];
     [[self bcView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 
-    if (@available(iOS 13.0, *)) {
-        UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
-        [appearance configureWithDefaultBackground];
-        UINavigationBar.appearance.standardAppearance = appearance;
-        UINavigationBar.appearance.compactAppearance = appearance;
-        UINavigationBar.appearance.scrollEdgeAppearance = appearance;
-    }
+    UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+    [appearance configureWithDefaultBackground];
+    UINavigationBar.appearance.standardAppearance = appearance;
+    UINavigationBar.appearance.compactAppearance = appearance;
+    UINavigationBar.appearance.scrollEdgeAppearance = appearance;
 }
 
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -69,25 +62,20 @@
         [aoVC setBcView:[self bcView]];
     }
 
-    if (@available(iOS 15.0, *))
+    UISheetPresentationController *sheet = [nav sheetPresentationController];
+    if (sheet)
     {
-        UISheetPresentationController *sheet = [nav sheetPresentationController];
-        if (sheet)
-        {
-            [sheet setDetents:@[[UISheetPresentationControllerDetent mediumDetent],
-                                [UISheetPresentationControllerDetent largeDetent]]];
-            [sheet setPrefersGrabberVisible:YES];
-        }
+        [sheet setDetents:@[[UISheetPresentationControllerDetent mediumDetent],
+                            [UISheetPresentationControllerDetent largeDetent]]];
+        [sheet setPrefersGrabberVisible:YES];
     }
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [[self bcView] setTransitioning:YES];
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
-    {
-        // do whatever
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    [coordinator animateAlongsideTransition:nil
+                                 completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
     {
         [[self bcView] setTransitioning:NO];
     }];

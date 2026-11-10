@@ -14,8 +14,6 @@
 @interface BezierClockView ()
 
 @property (nonatomic, strong) CADisplayLink       *displayLink;
-@property (nonatomic)         BOOL                 animationRunning;
-@property (nonatomic)         CFTimeInterval       lastDrawTime;
 
 @property (nonatomic, strong) BezierDigitAnimator *hoursTensDigit;
 @property (nonatomic, strong) BezierDigitAnimator *hoursUnitsDigit;
@@ -38,45 +36,39 @@
     if (self)
     {
         //
-        // Set up default options, if necessary.
+        // Register default options; these are used for any option the
+        // user hasn't changed.
         //
-        NSUserDefaults *userDefaults  = [NSUserDefaults standardUserDefaults];
-        BOOL            isInitialized = [userDefaults boolForKey:@"initialized"];
-        if (!isInitialized)
-        {
-            [userDefaults setBool:YES forKey:@"initialized"];
+        // http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
+        NSUserDefaults *userDefaults               = [NSUserDefaults standardUserDefaults];
+        NSData         *defaultLineColorData       = [NSKeyedArchiver archivedDataWithRootObject:[UIColor labelColor] requiringSecureCoding:NO error:nil];
+        NSData         *defaultBackgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:[UIColor systemBackgroundColor] requiringSecureCoding:NO error:nil];
 
-            // http://stackoverflow.com/questions/1275662/saving-uicolor-to-and-loading-from-nsuserdefaults
-            NSData *lineColorData       = [NSKeyedArchiver archivedDataWithRootObject:[UIColor labelColor] requiringSecureCoding:NO error:nil];
-            NSData *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:[UIColor systemBackgroundColor] requiringSecureCoding:NO error:nil];
-
-            [userDefaults setBool:NO                    forKey:@"drawControlLines"];
-            [userDefaults setBool:NO                    forKey:@"continualAnimation"];
-            [userDefaults setBool:NO                    forKey:@"showContinualShadows"];
-            [userDefaults setInteger:4                  forKey:@"animationType"];
-            [userDefaults setFloat:1.0                  forKey:@"animDurationUser"];
-            [userDefaults setObject:lineColorData       forKey:@"lineColor"];
-            [userDefaults setFloat:1.0                  forKey:@"lineSize"];
-            [userDefaults setObject:backgroundColorData forKey:@"backgroundColor"];
-
-            [userDefaults synchronize];
-        }
+        [userDefaults registerDefaults:@{ @"drawControlLines"     : @NO,
+                                          @"continualAnimation"   : @NO,
+                                          @"showContinualShadows" : @NO,
+                                          @"animationType"        : @(BezierAnimationTypeSinusoidal),
+                                          @"animDurationUser"     : @1.0f,
+                                          @"lineColor"            : defaultLineColorData,
+                                          @"lineSize"             : @1.0f,
+                                          @"backgroundColor"      : defaultBackgroundColorData }];
 
         //
         // Initialize options from NSUserDefaults
         //
-        NSData *lineColorData       = [[NSUserDefaults standardUserDefaults] objectForKey:@"lineColor"];
-        NSData *backgroundColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"];
+        NSData *lineColorData       = [userDefaults objectForKey:@"lineColor"];
+        NSData *backgroundColorData = [userDefaults objectForKey:@"backgroundColor"];
 
         _drawControlLines           = [userDefaults boolForKey:@"drawControlLines"];
         _continualAnimation         = [userDefaults boolForKey:@"continualAnimation"];
-        _showContinualShadows       = [userDefaults boolForKey:@"showContinualShadows"];;
-        // 1 for linear, 2 for quadratic, 3 for cubic, 4 for sinuisoidial
+        _showContinualShadows       = [userDefaults boolForKey:@"showContinualShadows"];
         _animationType              = [userDefaults integerForKey:@"animationType"];
         _animDurationUser           = [userDefaults floatForKey:@"animDurationUser"];
         _lineColor                  = [NSKeyedUnarchiver unarchivedObjectOfClass:[UIColor class] fromData:lineColorData error:nil];
         _lineSize                   = [userDefaults floatForKey:@"lineSize"];
         _bgColor                    = [NSKeyedUnarchiver unarchivedObjectOfClass:[UIColor class] fromData:backgroundColorData error:nil];
+
+        [self setBackgroundColor:_bgColor];
 
         [BezierDigitAnimator setDrawControlLines:_drawControlLines];
         [BezierDigitAnimator setContinualAnimation:_continualAnimation];
@@ -97,27 +89,43 @@
                                                    [[BezierDigit alloc] initWithDigit:9],
                                                    nil];
 
+        //
+        // Each digit's animation start ratio is set on every frame in drawRect:,
+        // based on the user's animation duration.
+        //
         int dist = 0;
-        // In each the following, the ratio at which the numbers start
-        // animating is calculated as the ratio of the pause time to the animation time.
-        // The fact that they add up to the correct amt of seconds is just to make it easier to tweak.
         int yOff = 50;
 
-        _hoursTensDigit    = [[BezierDigitAnimator alloc] init:0             origY:yOff pauseDuration:35995.0 animDuration:5.0];
-        _hoursUnitsDigit   = [[BezierDigitAnimator alloc] init:(dist += 300) origY:yOff pauseDuration:35995.0 animDuration:5.0];
-        _minutesTensDigit  = [[BezierDigitAnimator alloc] init:(dist += 500) origY:yOff pauseDuration:595.0   animDuration:5.0];
-        _minutesUnitsDigit = [[BezierDigitAnimator alloc] init:(dist += 300) origY:yOff pauseDuration:55.0    animDuration:5.0];
-        _secondsTensDigit  = [[BezierDigitAnimator alloc] init:(dist += 500) origY:yOff pauseDuration:5.0     animDuration:5.0];
-        _secondsUnitsDigit = [[BezierDigitAnimator alloc] init:(dist +  300) origY:yOff pauseDuration:0.0     animDuration:1.0];
-
-        //
-        // Animation
-        //
-        [self setDisplayLink:[CADisplayLink displayLinkWithTarget:self
-                                                         selector:@selector(setNeedsDisplay)]];
+        _hoursTensDigit    = [[BezierDigitAnimator alloc] initWithOrigX:0             origY:yOff];
+        _hoursUnitsDigit   = [[BezierDigitAnimator alloc] initWithOrigX:(dist += 300) origY:yOff];
+        _minutesTensDigit  = [[BezierDigitAnimator alloc] initWithOrigX:(dist += 500) origY:yOff];
+        _minutesUnitsDigit = [[BezierDigitAnimator alloc] initWithOrigX:(dist += 300) origY:yOff];
+        _secondsTensDigit  = [[BezierDigitAnimator alloc] initWithOrigX:(dist += 500) origY:yOff];
+        _secondsUnitsDigit = [[BezierDigitAnimator alloc] initWithOrigX:(dist +  300) origY:yOff];
     }
 
     return self;
+}
+
+//
+// Run the display link only while the view is in a window. The display link
+// retains its target, so invalidating it here also breaks that retain cycle.
+//
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+
+    if ([self window] && ![self displayLink])
+    {
+        [self setDisplayLink:[CADisplayLink displayLinkWithTarget:self
+                                                         selector:@selector(setNeedsDisplay)]];
+        [[self displayLink] addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    }
+    else if (![self window] && [self displayLink])
+    {
+        [[self displayLink] invalidate];
+        [self setDisplayLink:nil];
+    }
 }
 
 - (void)setDrawControlLines:(BOOL)on
@@ -147,7 +155,7 @@
     [userDefaults setBool:on forKey:@"showContinualShadows"];
 }
 
-- (void)setAnimationType:(NSInteger)type
+- (void)setAnimationType:(BezierAnimationType)type
 {
     _animationType = type;
     [BezierDigitAnimator setAnimationType:type];
@@ -186,6 +194,7 @@
 - (void)setBgColor:(UIColor *)backgroundColor
 {
     _bgColor = backgroundColor;
+    [self setBackgroundColor:backgroundColor];
 
     NSUserDefaults *userDefaults        = [NSUserDefaults standardUserDefaults];
     NSData         *backgroundColorData = [NSKeyedArchiver archivedDataWithRootObject:backgroundColor requiringSecureCoding:NO error:nil];
@@ -221,27 +230,6 @@
 //
 - (void)drawRect:(CGRect)rect
 {
-    //
-    // Animation control
-    //
-    if (![self animationRunning])
-    {
-        [[self displayLink] addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-        [self setAnimationRunning:YES];
-        return;
-    }
-
-    if ([self lastDrawTime] == 0)
-    {
-        [self setLastDrawTime:[[self displayLink] timestamp]];
-        return;
-    }
-
-    //
-    // Always set bg color...
-    //
-    [self setBackgroundColor:[self bgColor]];
-
     //
     // Time display is about 2400x300. Scale so it fits...
     //
@@ -307,12 +295,12 @@
     int   minutesUnit      = minuteTotal % 10;
     int   minutesTen       = (minuteTotal % 100 - minuteTotal % 10) / 10;
     float minutesUnitRatio = (secondTotal * 1000 + millis) / 60000.0;
-    float mintuesTenRatio  = (minutesUnit * 60000 + secondTotal * 1000 + millis) / 600000.0;
+    float minutesTenRatio  = (minutesUnit * 60000 + secondTotal * 1000 + millis) / 600000.0;
 
     [[self minutesTensDigit] setAnimationStartRatio:[self getAnimStartRatio:600]];
     [[self minutesTensDigit] update:[[self digits] objectAtIndex:minutesTen]
                                 next:[[self digits] objectAtIndex:[self getNextInt:minutesTen max:5]]
-                              ratio:mintuesTenRatio];
+                              ratio:minutesTenRatio];
 
     [[self minutesUnitsDigit] setAnimationStartRatio:[self getAnimStartRatio:60]];
     [[self minutesUnitsDigit] update:[[self digits] objectAtIndex:minutesUnit]

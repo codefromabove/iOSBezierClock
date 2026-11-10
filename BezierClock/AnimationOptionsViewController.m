@@ -54,11 +54,6 @@
     [[self animationDurationControlOutlet] setMaximumValue:1.0];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - Navigation
 
 - (IBAction)doneAction:(id)sender
@@ -86,7 +81,8 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [[self bcView] setAnimationType:(int)row + 1];
+    // Picker rows are in BezierAnimationType order
+    [[self bcView] setAnimationType:BezierAnimationTypeLinear + row];
 }
 
 #pragma mark - Animation Duration

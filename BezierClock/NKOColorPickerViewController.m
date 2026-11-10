@@ -32,7 +32,7 @@
         }];
     }
     else {
-        UIColor *backgroundColor = [[self bcView] backgroundColor];
+        UIColor *backgroundColor = [[self bcView] bgColor];
         [self.colorPicker setColor:backgroundColor];
         [self.colorPicker setDidChangeColorBlock:^(UIColor *color)
         {

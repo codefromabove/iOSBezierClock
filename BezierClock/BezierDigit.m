@@ -129,6 +129,11 @@
                                                        @[@298.0, @95.0,  @297.0, @365.0, @297.0, @448.0], nil];
                 break;
             }
+            default:
+            {
+                NSAssert(NO, @"BezierDigit: digit %d is out of range 0..9", digit);
+                return nil;
+            }
         }
     }
 
