@@ -179,7 +179,7 @@ static BOOL      _drawControlLines;
 
         [path setLineWidth:5.0 * _lineSize];
         [path setLineCapStyle:kCGLineCapRound];
-        [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], animationRatio) + [self origX],
+        [path moveToPoint:CGPointMake(lerp([current vertexX], [next vertexX], ratio) + [self origX],
                                       lerp([current vertexY], [next vertexY], ratio) + [self origY])];
 
         for (int i = 0; i < 4; i++)

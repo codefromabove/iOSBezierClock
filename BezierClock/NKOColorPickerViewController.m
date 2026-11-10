@@ -19,13 +19,16 @@
 {
     [super viewDidLoad];
 
+    // The color picker retains its block, so capture self weakly to avoid a retain cycle.
+    __weak typeof(self) weakSelf = self;
+
     if ([self editMode] == kLineColorEditMode) {
         UIColor *lineColor = [[self bcView] lineColor];
         [self.colorPicker setColor:lineColor];
         [self.colorPicker setDidChangeColorBlock:^(UIColor *color)
         {
-            [self.displayOptionsViewController setLineSwatchColor:color];
-            [[self bcView] setLineColor:color];
+            [weakSelf.displayOptionsViewController setLineSwatchColor:color];
+            [[weakSelf bcView] setLineColor:color];
         }];
     }
     else {
@@ -33,8 +36,8 @@
         [self.colorPicker setColor:backgroundColor];
         [self.colorPicker setDidChangeColorBlock:^(UIColor *color)
         {
-            [self.displayOptionsViewController setBackgroundSwatchColor:color];
-            [[self bcView] setBgColor:color];
+            [weakSelf.displayOptionsViewController setBackgroundSwatchColor:color];
+            [[weakSelf bcView] setBgColor:color];
         }];
     }
 }

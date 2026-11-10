@@ -135,7 +135,7 @@
     [BezierDigitAnimator setContinualAnimation:on];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:on forKey:@"setContinualAnimation"];
+    [userDefaults setBool:on forKey:@"continualAnimation"];
 }
 
 - (void)setShowContinualShadows:(BOOL)on
@@ -144,7 +144,7 @@
     [BezierDigitAnimator setShowContinualShadows:on];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:on forKey:@"setShowContinualShadows"];
+    [userDefaults setBool:on forKey:@"showContinualShadows"];
 }
 
 - (void)setAnimationType:(NSInteger)type
@@ -311,7 +311,7 @@
 
     [[self minutesTensDigit] setAnimationStartRatio:[self getAnimStartRatio:600]];
     [[self minutesTensDigit] update:[[self digits] objectAtIndex:minutesTen]
-                                next:[[self digits] objectAtIndex:[self getNextInt:minutesUnit max:5]]
+                                next:[[self digits] objectAtIndex:[self getNextInt:minutesTen max:5]]
                               ratio:mintuesTenRatio];
 
     [[self minutesUnitsDigit] setAnimationStartRatio:[self getAnimStartRatio:60]];
