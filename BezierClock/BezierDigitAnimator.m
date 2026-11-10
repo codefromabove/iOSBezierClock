@@ -2,7 +2,7 @@
 //  BezierDigitAnimator.m
 //  BezierClock
 //
-//  Translated from original code source: Jack Frigaard, http://jackf.net/bezier-clock/
+//  Translated from original code source: Jack Frigaard, https://jackfrigaard.com/bezier-clock/
 //  by Philip Schneider on 1/1/15.
 //  Copyright (c) 2015-2026 Code From Above, LLC. All rights reserved.
 //
