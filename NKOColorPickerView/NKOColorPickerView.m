@@ -250,9 +250,15 @@ CGFloat const NKOPickerViewCrossHairshWidthAndHeight    = 38.f;
 
 - (UIColor*)_defaultTintColor
 {
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    if ([window respondsToSelector:@selector(tintColor)]) {
-        return [window tintColor];
+    // Under the UIScene life cycle the app delegate has no window; use the
+    // key window of a connected window scene instead.
+    for (UIScene *scene in [[UIApplication sharedApplication] connectedScenes]) {
+        if ([scene isKindOfClass:[UIWindowScene class]]) {
+            UIWindow *window = [(UIWindowScene *)scene keyWindow];
+            if (window) {
+                return [window tintColor];
+            }
+        }
     }
     return [UIColor whiteColor];
 }
